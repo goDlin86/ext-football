@@ -1,0 +1,56 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 8px;
+}
+
+.grid-container8 {
+    display: grid;
+    grid-template-columns: 100px 1fr 100px;
+    grid-template-rows: repeat(4, 1fr);
+    grid-auto-flow: column;
+    align-items: center;
+}
+.grid-container4 {
+    grid-row-start: 1;
+    grid-row-end: 5;
+    display: grid;
+    grid-template-columns: 110px 1fr 110px;
+    grid-template-rows: repeat(2, 1fr);
+    grid-auto-flow: column;
+    align-items: center;
+    height: 100%;
+}
+.grid-container2 {
+    grid-row-start: 1;
+    grid-row-end: 3;
+    display: grid;
+    grid-template-columns: 110px 1fr 110px;
+    grid-auto-flow: column;
+    align-items: center;
+}
+.rigth {
+    grid-column-start: 3;
+}
+
+.game {
+    font-size: 1.3em;
+    font-weight: bold;
+    padding: 8px;
+    text-align: center;
+}
+.date {
+    font-size: 0.8em;
+    color: gray;
+    margin-bottom: 4px;
+}
+.town {
+    font-size: 0.8em;
+    color: #b7b7b7;
+    font-weight: 400;
+    margin-top: 4px;
+}
+.final {
+    font-size: 2em;
+    width: 135px;
+}
