@@ -1,4 +1,6 @@
 (async () => {
+    const matchesEl = document.querySelectorAll('.game')
+
     const resp = await fetch(
         'https://api.football-data.org/v2/competitions/EC/matches', 
         {
@@ -9,19 +11,16 @@
         }
     )
     const data = await resp.json()
-
     const matches = data.matches.filter(m => m.matchday > 3)
-
-    const matchesEl = document.querySelectorAll('.game')
 
     matches.map((match, i) => {
         if (match.homeTeam.name) {
-            matchesEl[i].querySelector('.teams').innerText = match.homeTeam.name + ' - ' + match.awayTeam.name
+            const teamsEl = matchesEl[i].querySelector('.teams')
+            teamsEl.innerText = match.homeTeam.name + ' - ' + match.awayTeam.name
 
             if (match.score.fullTime.homeTeam) {
-                matchesEl[i].querySelector('.teams').innerText += match.score.fullTime.homeTeam + ' - ' + match.score.fullTime.awayTeam
+                teamsEl.innerText += match.score.fullTime.homeTeam + ' - ' + match.score.fullTime.awayTeam
             }
         }
     })
-
 })()
