@@ -1,26 +1,29 @@
-(async () => {
+chrome.storage.local.get(['football_api_token'], async ({ football_api_token }) => {
     const matchesEl = document.querySelectorAll('.game')
 
     const resp = await fetch(
         'https://api.football-data.org/v2/competitions/EC/matches', 
-        {
-            headers: 
-            {
-                'X-Auth-Token': '994947add6bc4de2a5d132959acc7563'
-            }
-        }
+        { headers: { 'X-Auth-Token': football_api_token } }
     )
     const data = await resp.json()
     const matches = data.matches.filter(m => m.matchday > 3)
 
     matches.map((match, i) => {
-        if (match.homeTeam.name) {
-            const teamsEl = matchesEl[i].querySelector('.teams')
-            teamsEl.innerText = match.homeTeam.name + ' - ' + match.awayTeam.name
 
-            if (match.score.fullTime.homeTeam) {
-                teamsEl.innerText += match.score.fullTime.homeTeam + ' - ' + match.score.fullTime.awayTeam
-            }
+        const teamsEl = matchesEl[i].querySelector('.teams')
+        const teams = teamsEl.innerText.split(' - ')
+
+        if (teams.length > 1) {
+            teamsEl.innerText = (match.homeTeam.name || teams[0]) + ' - ' + (match.awayTeam.name || teams[1])
+        } else {
+            //teamsEl.innerText = (match.homeTeam.name || 'Winner') + ' - ' + (match.awayTeam.name || 'Winner')
+        }
+
+        if (match.score.fullTime.homeTeam) {
+            teamsEl.innerText += match.score.fullTime.homeTeam + ' - ' + match.score.fullTime.awayTeam
+        }
+        if (match.score.extraTime.homeTeam) {
+            teamsEl.innerText += '(' + match.score.extraTime.homeTeam + ' - ' + match.score.extraTime.awayTeam + ')'
         }
     })
-})()
+})

@@ -8,6 +8,7 @@
     "action": {
         "default_title": "Show euro2021",
         "default_popup": "dist/popup.html"
-    }
+    },
 
+    "permissions": ["storage"]
 }
