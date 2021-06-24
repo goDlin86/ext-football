@@ -9,15 +9,10 @@ chrome.storage.local.get(['football_api_token'], async ({ football_api_token }) 
     const matches = data.matches.filter(m => m.matchday > 3)
 
     matches.map((match, i) => {
-
         const teamsEl = matchesEl[i].querySelector('.teams')
         const teams = teamsEl.innerText.split(' - ')
 
-        if (teams.length > 1) {
-            teamsEl.innerText = (match.homeTeam.name || teams[0]) + ' - ' + (match.awayTeam.name || teams[1])
-        } else {
-            //teamsEl.innerText = (match.homeTeam.name || 'Winner') + ' - ' + (match.awayTeam.name || 'Winner')
-        }
+        teamsEl.innerText = (match.homeTeam.name || teams[0]) + ' - ' + (match.awayTeam.name || teams[1])
 
         if (match.score.fullTime.homeTeam) {
             teamsEl.innerText += match.score.fullTime.homeTeam + ' - ' + match.score.fullTime.awayTeam
