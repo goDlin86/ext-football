@@ -14,11 +14,11 @@ chrome.storage.local.get(['football_api_token'], async ({ football_api_token }) 
 
         teamsEl.innerText = (match.homeTeam.name || teams[0]) + ' - ' + (match.awayTeam.name || teams[1])
 
-        if (match.score.fullTime.homeTeam) {
-            teamsEl.innerText += match.score.fullTime.homeTeam + ' - ' + match.score.fullTime.awayTeam
+        if (match.score.fullTime.homeTeam !== null) {
+            teamsEl.innerText += ' ' + match.score.fullTime.homeTeam + ' - ' + match.score.fullTime.awayTeam
         }
-        if (match.score.extraTime.homeTeam) {
-            teamsEl.innerText += '(' + match.score.extraTime.homeTeam + ' - ' + match.score.extraTime.awayTeam + ')'
+        if (match.score.extraTime.homeTeam !== null) {
+            teamsEl.innerText += ' (' + match.score.extraTime.homeTeam + ' - ' + match.score.extraTime.awayTeam + ')'
         }
     })
 })
