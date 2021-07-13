@@ -1,13 +1,13 @@
 {
     "manifest_version": 3,
   
-    "name": "euro2021",
-    "description": "Euro2020 playoff",
+    "name": "football",
+    "description": "Footbal results",
     "version": "1.0",
 
     "action": {
-        "default_title": "Show euro2020",
-        "default_popup": "euro2020/popup.html"
+        "default_title": "Show football results",
+        "default_popup": "cl21-22/popup.html"
     },
 
     "permissions": ["storage"]

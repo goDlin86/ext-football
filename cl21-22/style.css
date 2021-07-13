@@ -1,0 +1,35 @@
+@font-face {
+    font-family: 'Novarese';
+    src: url("ITC\ Novarese\ Std/NovareseStd-Book.otf") format("opentype");
+}
+@font-face {
+    font-family: 'Novarese';
+    font-weight: bold;
+    src: url("ITC\ Novarese\ Std/NovareseStd-Bold.otf") format("opentype");
+}
+
+body {
+    width: 760px;
+    height: 560px;
+    margin: 0;
+    padding: 20px;
+    font-family: 'Novarese', sans-serif;
+    font-size: 1.2em;
+    color: white;
+    background-image: url('uefa-champions-league2.jpeg');
+    background-position: center;
+}
+.table {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    grid-auto-flow: column;
+    column-gap: 240px;
+    row-gap: 10px;
+    align-items: center;
+}
+.group {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 5px;
+    border-radius: 5px;
+}
