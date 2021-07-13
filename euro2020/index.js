@@ -2,7 +2,7 @@ chrome.storage.local.get(['football_api_token'], async ({ football_api_token }) 
     const matchesEl = document.querySelectorAll('.game')
 
     const resp = await fetch(
-        'https://api.football-data.org/v2/competitions/EC/matches', 
+        'https://api.football-data.org/v2/competitions/EC/matches', //CL champions league
         { headers: { 'X-Auth-Token': football_api_token } }
     )
     const data = await resp.json()
@@ -22,3 +22,12 @@ chrome.storage.local.get(['football_api_token'], async ({ football_api_token }) 
         }
     })
 })
+
+// chrome.storage.local.get(['football_api_token'], async ({ football_api_token }) => {
+//     const resp = await fetch(
+//         'https://api.football-data.org/v2/competitions/CL/matches',
+//         { headers: { 'X-Auth-Token': football_api_token } }
+//     )
+//     const data = await resp.json()
+//     console.log(data)
+// })
