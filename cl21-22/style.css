@@ -9,24 +9,32 @@
 }
 
 body {
-    width: 760px;
-    height: 560px;
     margin: 0;
     padding: 20px;
     font-family: 'Novarese', sans-serif;
     font-size: 1.2em;
     color: white;
+    background-color: #02103c;
     background-image: url('uefa-champions-league2.jpeg');
+    background-attachment: fixed;
     background-position: center;
 }
 .table {
+    overflow-y: scroll;
+    position: relative;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    grid-auto-flow: column;
+    grid-template-columns: 260px 260px;
+    /* grid-template-rows: repeat(8, 1fr); */
+    /* grid-auto-flow: column; */
     column-gap: 240px;
     row-gap: 10px;
     align-items: center;
+}
+.date {
+    grid-column: 1/3;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 5px;
+    border-radius: 5px;
 }
 .group {
     background-color: rgba(0, 0, 0, 0.4);
