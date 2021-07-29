@@ -24,10 +24,17 @@ body {
     width: 83px;
     height: 80px;
     margin: 0 auto;
+    margin-bottom: 10px;
     background-image: url(logo_dark.svg);
     background-position: 50%;
     background-repeat: no-repeat;
     background-size: 83px 80px;
+}
+#table {
+    width: 760px;
+    height: 470px;
+    position: relative;
+    overflow: scroll;
 }
 .grid {
     margin-top: 10px;
@@ -43,14 +50,34 @@ body {
     grid-column: 1/3;
     text-align: center;
     position: sticky;
-    top: 5px;
+    top: 10px;
 }
-.match {
+.match, .group {
     /* backdrop-filter: blur(10px); */
     background-color: rgba(0, 0, 75, .5);
     padding: 10px;
     border-radius: 5px;
 }
+.group {
+    display: grid;
+    grid-template-columns: 60% 10% 10% 10% 10%;
+    row-gap: 5px;
+}
+.group::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 133px;
+    left: 255px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0), rgb(18,56,216), rgba(0,0,0,0));
+}
+.group > :not(.team, .title) {
+    text-align: center;
+}
+.group > :not(.team, .points), .title {
+    color: rgb(90,248,221);
+}
+
 .date {
     font-size: 0.8em;
     color: rgb(175, 175, 175);

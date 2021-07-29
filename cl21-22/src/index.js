@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { render } from 'react-dom'
 import MatchInfo from './components/MatchInfo'
+import GroupInfo from './components/GroupInfo'
 
 
 const App = () => {
@@ -51,6 +52,9 @@ const App = () => {
                     {m.matches.map(match => <MatchInfo match={match} />)}
                 </div>
             ))}
+            <div className='grid'>
+                <GroupInfo />
+            </div>
         </>
     )
 }
