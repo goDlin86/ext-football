@@ -18,6 +18,7 @@ const App = () => {
                 { headers: { 'X-Auth-Token': football_api_token } }
             )
             const data = await resp.json()
+            console.log(data)
 
             if (data.count > 0) {
                 const currentMatchday = data.matches[0].season.currentMatchday

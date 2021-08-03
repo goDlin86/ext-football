@@ -54,7 +54,7 @@ body {
 }
 .match, .group {
     /* backdrop-filter: blur(10px); */
-    background-color: rgba(0, 0, 75, .5);
+    background-color: rgba(0, 0, 75, .25);
     padding: 10px;
     border-radius: 5px;
 }

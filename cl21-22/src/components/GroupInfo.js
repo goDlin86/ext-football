@@ -9,22 +9,22 @@ const GroupInfo = ({ group }) => {
             <div>+/-</div>
             <div>G</div>
             
-            <div className='team'>LOKOMOTIV</div>
+            <div className='team'>Lokomotiv</div>
             <div className='points'>1</div>
             <div>1</div>
             <div>0</div>
             <div>2</div>
-            <div className='team'>LOKOMOTIV</div>
+            <div className='team'>Lokomotiv</div>
             <div className='points'>1</div>
             <div>1</div>
             <div>0</div>
             <div>2</div>
-            <div className='team'>LOKOMOTIV</div>
+            <div className='team'>Lokomotiv</div>
             <div className='points'>1</div>
             <div>1</div>
             <div>0</div>
             <div>2</div>
-            <div className='team'>LOKOMOTIV</div>
+            <div className='team'>Lokomotiv</div>
             <div className='points'>1</div>
             <div>1</div>
             <div>0</div>

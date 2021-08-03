@@ -7,7 +7,7 @@
 
     "action": {
         "default_title": "Show football results",
-        "default_popup": "cl21-22/popup.html"
+        "default_popup": "dist/index.html"
     },
 
     "permissions": ["storage"]
