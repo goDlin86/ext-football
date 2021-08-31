@@ -2,73 +2,73 @@ export const groups = [
     {
         title: 'GROUP A',
         commands: [
-            'MAN CITY',
-            'PSG',
-            'LEIPZIG',
-            'CLUB BRUGGE'
+            'Manchester City FC',
+            'Paris Saint-Germain FC',
+            'RB Leipzig',
+            'Club Brugge KV'
         ]
     },
     {
         title: 'GROUP B',
         commands: [
-            'ATLETICO',
-            'LIVERPOOL',
-            'PORTO',
-            'MILAN'
+            'Club Atlético de Madrid',
+            'Liverpool FC',
+            'FC Porto',
+            'AC Milan'
         ]
     },
     {
         title: 'GROUP C',
         commands: [
-            'SPORTING CP',
-            'DORTMUND',
-            'AJAX',
-            'BESIKTAS'
+            'Sporting Clube de Portugal',
+            'Borussia Dortmund',
+            'AFC Ajax',
+            'Beşiktaş JK'
         ]
     },
     {
         title: 'GROUP D',
         commands: [
-            'INTER',
-            'REAL MADRID',
-            'SHAKTAR',
-            'SHERIFF'
+            'FC Internazionale Milano',
+            'Real Madrid CF',
+            'FK Shakhtar Donetsk',
+            'FC Sheriff Tiraspol'
         ]
     },
     {
         title: 'GROUP E',
         commands: [
-            'BAYERN',
-            'BARCELONA',
-            'BENFICA',
-            'DYNAMO KYIV'
+            'FC Bayern München',
+            'FC Barcelona',
+            'Sport Lisboa e Benfica',
+            'FK Dynamo Kyiv'
         ]
     },
     {
         title: 'GROUP F',
         commands: [
-            'VILLARREAL',
-            'MAN UTD',
-            'ATALANTA',
-            'YOUNG BOYS'
+            'Villarreal CF',
+            'Manchester United FC',
+            'Atalanta BC',
+            'BSC Young Boys'
         ]
     },
     {
         title: 'GROUP G',
         commands: [
-            'LILLE',
-            'SEVILLA',
-            'SALZBURG',
-            'WOLFSBURG'
+            'Lille OSC',
+            'Sevilla FC',
+            'FC Red Bull Salzburg',
+            'VfL Wolfsburg'
         ]
     },
     {
         title: 'GROUP H',
         commands: [
-            'CHELSEA',
-            'JUVENTUS',
-            'ZENIT',
-            'MALMO'
+            'Chelsea FC',
+            'Juventus FC',
+            'FK Zenit Sankt-Petersburg',
+            'Malmö FF'
         ]
     }
 ] 

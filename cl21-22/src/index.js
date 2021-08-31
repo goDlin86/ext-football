@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import MatchInfo from './components/MatchInfo'
 import { groups } from './components/Groups'
 import GroupInfo from './components/GroupInfo'
+import GroupStage from './components/GroupStage'
 
 
 const App = () => {
@@ -19,28 +20,33 @@ const App = () => {
                 { headers: { 'X-Auth-Token': football_api_token } }
             )
             const data = await resp.json()
-            console.log(data)
+            //console.log(data)
 
             if (data.count > 0) {
                 const currentMatchday = data.matches[0].season.currentMatchday
                 //const matches = data.matches.filter(m => m.matchday >= currentMatchday)
-                const matches = data.matches.slice(data.matches.findIndex(m => m.matchday === currentMatchday))
+                const matches = data.matches.slice(93)
 
-                const matchesByDay = groupBy(matches, 'matchday')
-                //console.log(matchesByDay)
+                const matchesByDay = groupBy(matches, 'matchday', 'utcDate')
+                console.log(matchesByDay)
 
                 setMatches(matchesByDay)
             }
         })
     }
 
-    const groupBy = (items, key) => items.reduce(
+    const groupBy = (items, key, secondKey) => items.reduce(
         (result, item) => {
             const i = result.findIndex(r => r[key] === item[key])
             if (i >= 0) {
-                result[i].matches.push(item)
+                const k = result[i].dates.findIndex(r => r[secondKey] === item[secondKey])
+                if (k >= 0) {
+                    result[i].dates[k].matches.push(item)
+                } else {
+                    result[i].dates.push({ [secondKey]: item[secondKey], matches: [item] })
+                }
             } else {
-                result.push({ [key]: item[key], matches: [item] })
+                result.push({ [key]: item[key], dates: [{ [secondKey]: item[secondKey], matches: [item] }] })
             }
             return result
         }, 
@@ -91,17 +97,20 @@ const App = () => {
 
     return (
         <>
+            <div className='grid'>
+                {
+                    groups.map(group => <GroupInfo group={group}/>)
+                }
+            </div>
+
             {/* {matches.map(m => (
                 <div className='grid'>
                     <div className='match matchday'>{'Matchday ' + m.matchday}</div>
                     {m.matches.map(match => <MatchInfo match={match} />)}
                 </div>
             ))} */}
-            <div className='grid'>
-                {
-                    groups.map(group => <GroupInfo group={group}/>)
-                }
-            </div>
+
+            {matches.map(m => <GroupStage stage={m} />)}
         </>
     )
 }
