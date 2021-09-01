@@ -7,6 +7,7 @@ import GroupStage from './components/GroupStage'
 
 
 const App = () => {
+    const [groupsInfo, setGroups] = useState([])
     const [matches, setMatches] = useState([])
 
     useEffect(() => {
@@ -26,10 +27,34 @@ const App = () => {
                 const currentMatchday = data.matches[0].season.currentMatchday
                 //const matches = data.matches.filter(m => m.matchday >= currentMatchday)
                 const matches = data.matches.slice(93)
+                
+                const groupsResult = groupInfo(matches)
+                const groupsTable = groups.map(g => {
+                    const result = g
+                    for (let index = 0; index < 4; index++) {
+                        const element = result.commands[index];
+                        const i = groupsResult.findIndex(r => r.team === element)
+                        if (i >= 0) {
+                            result.commands[index] = groupsResult[i]
+                        } else {
+                            result.commands[index] = {
+                                team: element,
+                                points: 0,
+                                plays: 0, 
+                                plusminus: 0,
+                                goals: 0
+                            }
+                        }
+                    }
+
+                    return result
+                })
+                console.log(groupsTable)
 
                 const matchesByDay = groupBy(matches, 'matchday', 'utcDate')
-                console.log(matchesByDay)
+                //console.log(matchesByDay)
 
+                setGroups(groupsTable)
                 setMatches(matchesByDay)
             }
         })
@@ -55,39 +80,41 @@ const App = () => {
 
     const groupInfo = (items) => items.reduce(
         (result, item) => {
-            const homeTeam = { 
-                team: item.homeTeam.name,
-                points: item.score.fullTime.homeTeam > item.score.fullTime.awayTeam ? 3 : item.score.fullTime.homeTeam < item.score.fullTime.awayTeam ? 0 : 1,
-                plays: 1, 
-                plusminus: item.score.fullTime.homeTeam - item.score.fullTime.awayTeam,
-                goals: item.score.fullTime.homeTeam
-            }
-            const awayTeam = { 
-                team: item.awayTeam.name,
-                points: item.score.fullTime.awayTeam > item.score.fullTime.homeTeam ? 3 : item.score.fullTime.awayTeam < item.score.fullTime.homeTeam ? 0 : 1,
-                plays: 1, 
-                plusminus: item.score.fullTime.awayTeam - item.score.fullTime.homeTeam,
-                goals: item.score.fullTime.awayTeam
-            }
+            if (item.status === 'FINISHED') {
+                const homeTeam = { 
+                    team: item.homeTeam.name,
+                    points: item.score.fullTime.homeTeam > item.score.fullTime.awayTeam ? 3 : item.score.fullTime.homeTeam < item.score.fullTime.awayTeam ? 0 : 1,
+                    plays: 1, 
+                    plusminus: item.score.fullTime.homeTeam - item.score.fullTime.awayTeam,
+                    goals: item.score.fullTime.homeTeam
+                }
+                const awayTeam = { 
+                    team: item.awayTeam.name,
+                    points: item.score.fullTime.awayTeam > item.score.fullTime.homeTeam ? 3 : item.score.fullTime.awayTeam < item.score.fullTime.homeTeam ? 0 : 1,
+                    plays: 1, 
+                    plusminus: item.score.fullTime.awayTeam - item.score.fullTime.homeTeam,
+                    goals: item.score.fullTime.awayTeam
+                }
 
-            let i = result.findIndex(r => r.team === homeTeam.team)
-            if (i >= 0) {
-                result[i].points += homeTeam.points
-                result[i].plays += homeTeam.plays
-                result[i].plusminus += homeTeam.plusminus
-                result[i].goals += homeTeam.goals
-            } else {
-                result.push(homeTeam)
-            }
-            
-            i = result.findIndex(r => r.team === awayTeam.team)
-            if (i >= 0) {
-                result[i].points += awayTeam.points
-                result[i].plays += awayTeam.plays
-                result[i].plusminus += awayTeam.plusminus
-                result[i].goals += awayTeam.goals
-            } else {
-                result.push(awayTeam)
+                let i = result.findIndex(r => r.team === homeTeam.team)
+                if (i >= 0) {
+                    result[i].points += homeTeam.points
+                    result[i].plays += homeTeam.plays
+                    result[i].plusminus += homeTeam.plusminus
+                    result[i].goals += homeTeam.goals
+                } else {
+                    result.push(homeTeam)
+                }
+                
+                i = result.findIndex(r => r.team === awayTeam.team)
+                if (i >= 0) {
+                    result[i].points += awayTeam.points
+                    result[i].plays += awayTeam.plays
+                    result[i].plusminus += awayTeam.plusminus
+                    result[i].goals += awayTeam.goals
+                } else {
+                    result.push(awayTeam)
+                }
             }
 
             return result
@@ -99,7 +126,7 @@ const App = () => {
         <>
             <div className='grid'>
                 {
-                    groups.map(group => <GroupInfo group={group}/>)
+                    groupsInfo.map(group => <GroupInfo group={group}/>)
                 }
             </div>
 

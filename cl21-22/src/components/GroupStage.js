@@ -11,9 +11,9 @@ const GroupStage = ({ stage }) => {
                     {d.matches.map(match => (
                         <div className='matchinfo'>
                             <div>{match.homeTeam.name}</div>
-                            <div className='score'>{match.score.fullTime.homeTeam}</div>
+                            <div>{match.score.fullTime.homeTeam}</div>
                             <div> - </div>
-                            <div className='score'>{match.score.fullTime.awayTeam}</div>
+                            <div>{match.score.fullTime.awayTeam}</div>
                             <div>{match.awayTeam.name}</div>
                         </div>
                     ))}

@@ -12,11 +12,11 @@ const GroupInfo = ({ group }) => {
             {
                 group.commands.map(c => (
                     <>
-                        <div className='team'>{c}</div>
-                        <div className='points'>0</div>
-                        <div>0</div>
-                        <div>0</div>
-                        <div>0</div>
+                        <div className='team'>{c.team}</div>
+                        <div className='points'>{c.points}</div>
+                        <div>{c.plays}</div>
+                        <div>{c.plusminus}</div>
+                        <div>{c.goals}</div>
                     </>
                 ))
             }
