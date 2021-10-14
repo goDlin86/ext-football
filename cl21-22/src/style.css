@@ -14,7 +14,7 @@ body {
     font-family: 'Novarese', sans-serif;
     font-size: 1.2em;
     color: white;
-    background-image: url(backgroundDark01L.jpg);
+    background-image: url(backgroundDark01L.webp);
     background-color: #040a63;
     background-position: center;
     background-attachment: fixed;
@@ -70,6 +70,7 @@ body {
     width: 2px;
     height: 133px;
     left: 257px;
+    top: 15px;
     background: linear-gradient(to bottom, rgba(0,0,0,0), rgb(18,56,216), rgba(0,0,0,0));
 }
 .group > :not(.team, .title) {
@@ -101,5 +102,5 @@ body {
 }
 .matchinfo {
     display: grid;
-    grid-template-columns: 1fr 15px 15px 15px 1fr;
+    grid-template-columns: 1fr 50px 20px 50px 1fr;
 }

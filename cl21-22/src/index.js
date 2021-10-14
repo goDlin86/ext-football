@@ -48,6 +48,9 @@ const App = () => {
                     }
 
                     return result
+                }).map(g => {
+                    g.commands = g.commands.sort((a, b) => (b.points - a.points) || (b.plusminus - a.plusminus) || (b.goals - a.goals) || (b.plays - a.plays))
+                    return g
                 })
                 console.log(groupsTable)
 
