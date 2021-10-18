@@ -7,16 +7,13 @@
     font-display: swap;
 }
 
-body {
+.grid-container8 {
     font-family: 'Bridge Type', sans-serif;
     margin: 0;
     padding: 8px;
     background-color: #27a7bc;
     background-image: url('euro2020back.jpeg');
     color: white;
-}
-
-.grid-container8 {
     display: grid;
     grid-template-columns: 120px 1fr 120px;
     grid-template-rows: repeat(4, 1fr);
@@ -44,7 +41,7 @@ body {
     row-gap: 20px;
     align-items: center;
 }
-.rigth {
+.right {
     grid-column-start: 3;
 }
 

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { render } from 'react-dom'
 import MatchInfo from './components/MatchInfo'
 import { groups } from './components/Groups'
 import GroupInfo from './components/GroupInfo'
 import GroupStage from './components/GroupStage'
+import './style.css'
 
-
-const App = () => {
+export default function ChampLeague21 () {
     const [groupsInfo, setGroups] = useState([])
     const [matches, setMatches] = useState([])
 
@@ -29,26 +28,27 @@ const App = () => {
                 const matches = data.matches.slice(93)
                 
                 const groupsResult = groupInfo(matches)
-                const groupsTable = groups.map(g => {
-                    const result = g
+                const groupsTable = []
+                groups.forEach(g => {
+                    const commands = []
                     for (let index = 0; index < 4; index++) {
-                        const element = result.commands[index];
-                        const i = groupsResult.findIndex(r => r.team === element)
+                        const i = groupsResult.findIndex(r => r.team === g.commands[index])
                         if (i >= 0) {
-                            result.commands[index] = groupsResult[i]
+                            commands.push(groupsResult[i])
                         } else {
-                            result.commands[index] = {
-                                team: element,
+                            commands.push({
+                                team: g.commands[index],
                                 points: 0,
                                 plays: 0, 
                                 plusminus: 0,
                                 goals: 0
-                            }
+                            })
                         }
                     }
 
-                    return result
-                }).map(g => {
+                    groupsTable.push({title: g.title, commands})
+                })
+                groupsTable.map(g => {
                     g.commands = g.commands.sort((a, b) => (b.points - a.points) || (b.plusminus - a.plusminus) || (b.goals - a.goals) || (b.plays - a.plays))
                     return g
                 })
@@ -126,23 +126,22 @@ const App = () => {
     )
 
     return (
-        <>
-            <div className='grid'>
-                {
-                    groupsInfo.map(group => <GroupInfo group={group}/>)
-                }
-            </div>
-
-            {/* {matches.map(m => (
+        <div class="league">
+            <div class="cl-logo"></div>
+            <div class="cl-container">
                 <div className='grid'>
-                    <div className='match matchday'>{'Matchday ' + m.matchday}</div>
-                    {m.matches.map(match => <MatchInfo match={match} />)}
+                    {groupsInfo.map(group => <GroupInfo group={group}/>)}
                 </div>
-            ))} */}
 
-            {matches.map(m => <GroupStage stage={m} />)}
-        </>
+                {/* {matches.map(m => (
+                    <div className='grid'>
+                        <div className='match matchday'>{'Matchday ' + m.matchday}</div>
+                        {m.matches.map(match => <MatchInfo match={match} />)}
+                    </div>
+                ))} */}
+
+                {matches.map(m => <GroupStage stage={m} />)}
+            </div>
+        </div>
     )
 }
-
-render(<App />, document.getElementById('table'))

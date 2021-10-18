@@ -1,10 +1,10 @@
 {
   "name": "footballshow",
-  "version": "1.0.0",
+  "version": "1.5.0",
   "description": "football matches show",
   "scripts": {
     "clean": "rm -rf dist/",
-    "build": "parcel build ./cl21-22/src/index.html --public-url ./"
+    "build": "parcel build ./home/index.html --public-url ./"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,8 @@
   "dependencies": {
     "dayjs": "^1.10.6",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.3.0"
   },
   "devDependencies": {
     "parcel": "^2.0.0"

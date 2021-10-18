@@ -8,11 +8,10 @@
     src: url("ITC Novarese Std/NovareseStd-Bold.otf") format("opentype");
 }
 
-body {
-    margin: 0;
+.league {
     padding: 20px;
     font-family: 'Novarese', sans-serif;
-    font-size: 1.2em;
+    font-size: 16px;
     color: white;
     background-image: url(backgroundDark01L.webp);
     background-color: #040a63;
@@ -20,7 +19,7 @@ body {
     background-attachment: fixed;
     background-size: 120%;
 }
-.logo {
+.cl-logo {
     width: 83px;
     height: 80px;
     margin: 0 auto;
@@ -30,8 +29,7 @@ body {
     background-repeat: no-repeat;
     background-size: 83px 80px;
 }
-#table {
-    width: 760px;
+.cl-container {
     height: 470px;
     position: relative;
     overflow: scroll;
