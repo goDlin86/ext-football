@@ -12,7 +12,7 @@ const App = () => {
                     EURO 2020
                 </Link>
                 <Link component={ChampLeague21}>
-                    Champions league 2021-2022
+                    Champions League 2021-2022
                 </Link>
             </div>
         </Router>

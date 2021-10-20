@@ -15,8 +15,12 @@ body {
     text-decoration: none;
     font-size: 20px;
     color: #4e4e4e;
+    font-weight: bold;
+    border: 2px solid rgba(0,0,0,0.15);
+    border-radius: 10px;
     transition: 0.3s;
     background-color: transparent;
+    box-shadow: 5px 5px rgba(0,0,0,0.15);
 }
 .menu > a:hover {
     background-color: rgba(0,0,0,0.05);
@@ -27,4 +31,5 @@ button {
     right: 10px;
     margin: 20px;
     z-index: 999;
+    cursor: pointer;
 }
