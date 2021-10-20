@@ -1,11 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { render } from 'react-dom'
-import {
-    goBack,
-    goTo,
-    Link,
-    Router
-  } from 'react-chrome-extension-router'
+import { Link, Router } from 'react-chrome-extension-router'
 import EURO2020 from '../euro2020/index'
 import ChampLeague21 from '../cl21-22/index'
 

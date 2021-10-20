@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import Match from './Match'
+import BackButton from '../home/BackButton'
 import './style.css'
 
 export default function EURO2020 () {
@@ -21,68 +23,25 @@ export default function EURO2020 () {
         })
     }
 
-    const teamsScore = (match) => {
-        let r = match.homeTeam.name + ' - ' + match.awayTeam.name
-
-        if (match.score.fullTime.homeTeam !== null)
-            r += ' ' + match.score.fullTime.homeTeam + ' - ' + match.score.fullTime.awayTeam
-
-        if (match.score.extraTime.homeTeam !== null)
-            r += ' (' + match.score.extraTime.homeTeam + ' - ' + match.score.extraTime.awayTeam + ')'
-
-        return r
-    }
-
     return (
         <div class="grid-container8">
-            {matchesInfo.quatro.map((m, i) => {
-                let teams = m.homeTeam + ' - ' + m.awayTeam
-                if (matches[i])
-                    teams = teamsScore(matches[i])
-
-                return (
-                    <div class={ i>3 ? "game right" : "game"}>
-                        <div class="date">{m.time}</div>
-                        <div class="teams">{teams}</div>
-                        <div class="town">{m.stadium}</div>
-                    </div>
-                )
-            })}
+            <BackButton />
+            {matchesInfo.quatro.map((m, i) => (
+                <Match m={m} i={i} match={matches[i]} minI={3}/>
+            ))}
 
             <div class="grid-container4">
-                {matchesInfo.semi.map((m, i) => {
-                    let teams = m.homeTeam + ' - ' + m.awayTeam
-                    const match = matches[i+8]
-                    if (match) 
-                        teams = teamsScore(match)
-
-                    return (
-                        <div class={ i>1 ? "game right" : "game"}>
-                            <div class="date">{m.time}</div>
-                            <div class="teams">{teams}</div>
-                            <div class="town">{m.stadium}</div>
-                        </div>
-                    )
-                })}
+                {matchesInfo.semi.map((m, i) => (
+                    <Match m={m} i={i} match={matches[i+8]} minI={1}/>
+                ))}
 
                 <div class="grid-container2">
                     <div class="logo">
                         EURO2020 <span>play-off</span>
                     </div>
-                    {matchesInfo.finals.map((m, i) => {
-                        let teams = m.homeTeam + ' - ' + m.awayTeam
-                        const match = matches[i+12]
-                        if (match)
-                            teams = teamsScore(match)
-
-                        return (
-                            <div class={ i>1 ? "game final" : "game"}>
-                                <div class="date">{m.time}</div>
-                                <div class="teams">{teams}</div>
-                                <div class="town">{m.stadium}</div>
-                            </div>
-                        )
-                    })}
+                    {matchesInfo.finals.map((m, i) => (
+                        <Match m={m} i={i} match={matches[i+12]} minI={1} final={true}/>
+                    ))}
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@ import MatchInfo from './components/MatchInfo'
 import { groups } from './components/Groups'
 import GroupInfo from './components/GroupInfo'
 import GroupStage from './components/GroupStage'
+import BackButton from '../home/BackButton'
 import './style.css'
 
 export default function ChampLeague21 () {
@@ -127,6 +128,7 @@ export default function ChampLeague21 () {
 
     return (
         <div class="league">
+            <BackButton />
             <div class="cl-logo"></div>
             <div class="cl-container">
                 <div className='grid'>
