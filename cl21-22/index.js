@@ -5,7 +5,7 @@ import BackButton from '../home/BackButton'
 import './style.css'
 
 export default function ChampLeague21 () {
-    const [stage, setStage] = useState(null)
+    const [stage, setStage] = useState(1)
 
     return (
         <div class="league">
