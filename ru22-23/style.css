@@ -1,0 +1,25 @@
+@font-face {
+    font-family: "ALS Sector Regular"; 
+    src: url("ALS Sector Regular Regular/595030bb520f1e2ab2fb4e8d7c5f30a5.eot"); 
+    src: url("ALS Sector Regular Regular/595030bb520f1e2ab2fb4e8d7c5f30a5.eot?#iefix") format("embedded-opentype"), 
+    url("ALS Sector Regular Regular/595030bb520f1e2ab2fb4e8d7c5f30a5.woff2") format("woff2"), 
+    url("ALS Sector Regular Regular/595030bb520f1e2ab2fb4e8d7c5f30a5.woff") format("woff"), 
+    url("ALS Sector Regular Regular/595030bb520f1e2ab2fb4e8d7c5f30a5.ttf") format("truetype"), 
+    url("ALS Sector Regular Regular/595030bb520f1e2ab2fb4e8d7c5f30a5.svg#ALS Sector Regular") format("svg");
+}
+
+.ru-league {
+    background-color: #FFDD2D;
+    padding: 10px;
+    font-family: "ALS Sector Regular";
+    font-size: 16px;
+}
+.ru-logo {
+    width: 326px;
+    height: 100px;
+    margin: 10px auto;
+    background-image: url(logo_new.svg);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: 326px 100px;
+}
