@@ -16,5 +16,9 @@
         "default_popup": "dist/index.html"
     },
 
-    "permissions": ["storage"]
+    "permissions": ["storage"],
+
+    "host_permissions": [ 
+        "https://api.football-data.org/*"
+    ]
 }

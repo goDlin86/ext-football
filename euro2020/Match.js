@@ -5,11 +5,11 @@ export default function Match ({ m, i, match, minI, final}) {
     if (match) {
         teams = match.homeTeam.name + ' - ' + match.awayTeam.name
 
-        if (match.score.fullTime.homeTeam !== null)
-            teams += ' ' + match.score.fullTime.homeTeam + ' - ' + match.score.fullTime.awayTeam
+        if ('fullTime' in match.score)
+            teams += ' ' + match.score.fullTime.home + ' - ' + match.score.fullTime.away
 
-        if (match.score.extraTime.homeTeam !== null)
-            teams += ' (' + match.score.extraTime.homeTeam + ' - ' + match.score.extraTime.awayTeam + ')'
+        if ('extraTime' in match.score)
+            teams += ' (' + match.score.extraTime.home + ' - ' + match.score.extraTime.away + ')'
     }
 
     return (

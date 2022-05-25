@@ -21,17 +21,17 @@ export const groupInfo = (items) => items.reduce(
         if (item.status === 'FINISHED') {
             const homeTeam = { 
                 team: item.homeTeam.name,
-                points: item.score.fullTime.homeTeam > item.score.fullTime.awayTeam ? 3 : item.score.fullTime.homeTeam < item.score.fullTime.awayTeam ? 0 : 1,
+                points: item.score.fullTime.home > item.score.fullTime.away ? 3 : item.score.fullTime.home < item.score.fullTime.away ? 0 : 1,
                 plays: 1, 
-                plusminus: item.score.fullTime.homeTeam - item.score.fullTime.awayTeam,
-                goals: item.score.fullTime.homeTeam
+                plusminus: item.score.fullTime.home - item.score.fullTime.away,
+                goals: item.score.fullTime.home
             }
             const awayTeam = { 
                 team: item.awayTeam.name,
-                points: item.score.fullTime.awayTeam > item.score.fullTime.homeTeam ? 3 : item.score.fullTime.awayTeam < item.score.fullTime.homeTeam ? 0 : 1,
+                points: item.score.fullTime.away > item.score.fullTime.home ? 3 : item.score.fullTime.away < item.score.fullTime.home ? 0 : 1,
                 plays: 1, 
-                plusminus: item.score.fullTime.awayTeam - item.score.fullTime.homeTeam,
-                goals: item.score.fullTime.awayTeam
+                plusminus: item.score.fullTime.away - item.score.fullTime.home,
+                goals: item.score.fullTime.away
             }
 
             let i = result.findIndex(r => r.team === homeTeam.team)

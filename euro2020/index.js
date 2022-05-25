@@ -13,7 +13,7 @@ export default function EURO2020 () {
     const fetchData = async () => {
         chrome.storage.local.get(['football_api_token'], async ({ football_api_token }) => {
             const resp = await fetch(
-                'https://api.football-data.org/v2/competitions/EC/matches',
+                'https://api.football-data.org/v4/competitions/EC/matches',
                 { headers: { 'X-Auth-Token': football_api_token } }
             )
             const data = await resp.json()
