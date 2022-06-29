@@ -19,6 +19,7 @@
     "permissions": ["storage"],
 
     "host_permissions": [ 
-        "https://api.football-data.org/*"
+        "https://api.football-data.org/*",
+        "https://premierliga.ru/*"
     ]
 }

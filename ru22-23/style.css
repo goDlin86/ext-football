@@ -23,3 +23,30 @@
     background-repeat: no-repeat;
     background-size: 326px 100px;
 }
+
+.ru-container {
+    height: 460px;
+    position: relative;
+    overflow: scroll;
+}
+.ru-table {
+    background-color: white;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 50px 1fr 50px 50px 50px 50px 100px 50px;
+    align-items: center;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 10px;
+}
+.ru-table .header {
+    font-size: 12px;
+    padding-bottom: 5px;
+}
+.ru-table img {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.ru-table .name {
+    text-align: left;
+}

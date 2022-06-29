@@ -16,7 +16,7 @@ export default function GroupView () {
     const fetchData = async () => {
         chrome.storage.local.get(['football_api_token'], async ({ football_api_token }) => {       
             const resp = await fetch(
-                'https://api.football-data.org/v4/competitions/CL/matches',
+                'https://api.football-data.org/v4/competitions/CL/matches?season=2021',
                 { headers: { 'X-Auth-Token': football_api_token } }
             )
             const data = await resp.json()
