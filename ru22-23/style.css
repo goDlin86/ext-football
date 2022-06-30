@@ -1,12 +1,22 @@
 @font-face {
     font-family: "ALS Sector Regular"; 
-    src: url("ALS Sector Regular Regular/595030bb520f1e2ab2fb4e8d7c5f30a5.eot"); 
-    src: url("ALS Sector Regular Regular/595030bb520f1e2ab2fb4e8d7c5f30a5.eot?#iefix") format("embedded-opentype"), 
-    url("ALS Sector Regular Regular/595030bb520f1e2ab2fb4e8d7c5f30a5.woff2") format("woff2"), 
-    url("ALS Sector Regular Regular/595030bb520f1e2ab2fb4e8d7c5f30a5.woff") format("woff"), 
-    url("ALS Sector Regular Regular/595030bb520f1e2ab2fb4e8d7c5f30a5.ttf") format("truetype"), 
-    url("ALS Sector Regular Regular/595030bb520f1e2ab2fb4e8d7c5f30a5.svg#ALS Sector Regular") format("svg");
+    src: url("ALS Sector Regular/595030bb520f1e2ab2fb4e8d7c5f30a5.eot"); 
+    src: url("ALS Sector Regular/595030bb520f1e2ab2fb4e8d7c5f30a5.eot?#iefix") format("embedded-opentype"), 
+    url("ALS Sector Regular/595030bb520f1e2ab2fb4e8d7c5f30a5.woff2") format("woff2"), 
+    url("ALS Sector Regular/595030bb520f1e2ab2fb4e8d7c5f30a5.woff") format("woff"), 
+    url("ALS Sector Regular/595030bb520f1e2ab2fb4e8d7c5f30a5.ttf") format("truetype"), 
+    url("ALS Sector Regular/595030bb520f1e2ab2fb4e8d7c5f30a5.svg#ALS Sector Regular") format("svg");
 }
+
+@font-face {
+    font-family: "ALS Sector Bold";
+    src: url("ALS Sector Bold/55c75572ae1d9f96d61851294e1698ec.eot");
+    src: url("ALS Sector Bold/55c75572ae1d9f96d61851294e1698ec.eot?#iefix") format("embedded-opentype"),
+    url("ALS Sector Bold/55c75572ae1d9f96d61851294e1698ec.woff2") format("woff2"),
+    url("ALS Sector Bold/55c75572ae1d9f96d61851294e1698ec.woff") format("woff"),
+    url("ALS Sector Bold/55c75572ae1d9f96d61851294e1698ec.ttf") format("truetype"),
+    url("ALS Sector Bold/55c75572ae1d9f96d61851294e1698ec.svg#ALS Sector Bold") format("svg");
+  }
 
 .ru-league {
     background-color: #FFDD2D;
@@ -40,8 +50,14 @@
     border-radius: 10px;
 }
 .ru-table .header {
+    display: contents;
     font-size: 12px;
+}
+.ru-table .header > div {
     padding-bottom: 5px;
+}
+.ru-table .header > .name {
+    padding-left: 33px;
 }
 .ru-table img {
     vertical-align: middle;
@@ -49,4 +65,55 @@
 }
 .ru-table .name {
     text-align: left;
+    padding: 0;
+}
+.rowWrapper {
+    display: contents;
+    cursor: pointer;
+}
+.rowWrapper > div {
+    padding: 4px 0;
+}
+.rowWrapper:hover > div, .rowWrapper.active > div {
+    transition: background-color .3s ease;
+    background-color: rgba(0,0,0,0.05);
+}
+
+.ru-matches {
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    text-align: center;
+}
+.ru-title {
+    grid-column: 1 / -1;
+    font-size: 20px;
+    padding-bottom: 5px;
+}
+.ru-match {
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.15);
+}
+.ru-date {
+    margin: 5px 0;
+    font-size: 14px;
+    color: rgba(0,0,0,0.5);
+}
+.ru-score {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    align-items: center;
+}
+.ru-scheduled {
+    grid-column: 1 / -1;
+    color: rgba(0,0,0,0.5);
+}
+.ru-bold {
+    font-family: "ALS Sector Bold";
 }

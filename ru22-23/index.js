@@ -1,14 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef, useLayoutEffect } from 'react'
 import BackButton from '../home/BackButton'
 import './style.css'
 
 export default function RuLeague22 () {
     const [matches, setMatches] = useState([])
     const [table, setTable] = useState([])
+    const [team, setTeam] = useState(null)
+
+    const ref = useRef(null)
 
     useEffect(() => {
         fetchData()
     }, [])
+
+    useLayoutEffect(() => {
+        ref.current.scrollIntoView({ behavior: 'smooth' })
+    }, [team])
 
     const fetchData = async () => {
         const resp = await fetch(
@@ -24,6 +31,8 @@ export default function RuLeague22 () {
         const data = await resp.json()
         
         console.log(data)
+
+        setMatches(data.contents)
      
         const t = data.contents.reduce((result, item) => {
             let i = result.findIndex(r => r.name === item.name1)
@@ -81,9 +90,7 @@ export default function RuLeague22 () {
             return result
         }, [])
 
-        setTable(t)
-        
-        //setMatches()
+        setTable(t.sort((a, b) => (b.points - a.points) || ((b.z - b.p) - (a.z - a.p)) || (b.z - a.z) || (a.plays - b.plays)))
     }
 
     return (
@@ -92,16 +99,18 @@ export default function RuLeague22 () {
             <div class="ru-logo"></div>
             <div class="ru-container">
                 <div class="ru-table">
-                    <div class="header">МЕСТО</div>
-                    <div class="header name">КОМАНДА</div>
-                    <div class="header">И</div>
-                    <div class="header">В</div>
-                    <div class="header">Н</div>
-                    <div class="header">П</div>
-                    <div class="header">З-П</div>
-                    <div class="header">ОЧКОВ</div>
+                    <div class="header">
+                        <div>МЕСТО</div>
+                        <div class="name">КОМАНДА</div>
+                        <div>И</div>
+                        <div>В</div>
+                        <div>Н</div>
+                        <div>П</div>
+                        <div>З-П</div>
+                        <div>ОЧКОВ</div>
+                    </div>
                     {table.map((c, i) => (
-                        <>
+                        <div class={team === c.name ? "rowWrapper active" : "rowWrapper"} onClick={() => { setTeam(c.name) }}>
                             <div>{i+1}</div>
                             <div class="name"><img src={c.club} width="30" height="30" />{c.name}</div>
                             <div>{c.plays}</div>
@@ -110,7 +119,28 @@ export default function RuLeague22 () {
                             <div>{c.l}</div>
                             <div>{c.z + ' - ' + c.p}</div>
                             <div>{c.points}</div>
-                        </>
+                        </div>
+                    ))}
+                </div>
+
+                <div class="ru-matches" ref={ref}>
+                    <div class="ru-title">Расписание матчей для команды <span class="ru-bold">{team}</span></div>
+                    {matches.filter(m => m.name1 === team || m.name2 === team).map(m => (
+                        <div class="ru-match">
+                            <div>{m.stageName}</div>
+                            <div class="ru-date">{m.day + ', ' + m.time}</div>
+                            <div class="ru-score">
+                                <div class={m.name1 === team ? "ru-bold" : null}>{m.name1}</div>
+                                <div class={m.name2 === team ? "ru-bold" : null}>{m.name2}</div>
+                                {m.goal1 === '' && m.goal2 === '' ?
+                                <div class="ru-scheduled">Не начался</div> :
+                                <>
+                                    <div>{m.goal1}</div>
+                                    <div>{m.goal2}</div>
+                                </>
+                                }
+                            </div>
+                        </div>
                     ))}
                 </div>
             </div>
