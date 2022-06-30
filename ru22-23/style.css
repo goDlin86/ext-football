@@ -7,7 +7,6 @@
     url("ALS Sector Regular/595030bb520f1e2ab2fb4e8d7c5f30a5.ttf") format("truetype"), 
     url("ALS Sector Regular/595030bb520f1e2ab2fb4e8d7c5f30a5.svg#ALS Sector Regular") format("svg");
 }
-
 @font-face {
     font-family: "ALS Sector Bold";
     src: url("ALS Sector Bold/55c75572ae1d9f96d61851294e1698ec.eot");
@@ -98,6 +97,15 @@
     padding: 5px;
     border-radius: 10px;
     border: 1px solid rgba(0,0,0,0.15);
+}
+.ru-match.win {
+    background-color: rgba(0,255,0,0.08);
+}
+.ru-match.lose {
+    background-color: rgba(255,0,0,0.08);
+}
+.ru-match.draw {
+    background-color: rgba(0,0,255,0.08);
 }
 .ru-date {
     margin: 5px 0;

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef, useLayoutEffect } from 'react'
+import classNames from 'classnames'
 import BackButton from '../home/BackButton'
 import './style.css'
 
@@ -110,7 +111,7 @@ export default function RuLeague22 () {
                         <div>ОЧКОВ</div>
                     </div>
                     {table.map((c, i) => (
-                        <div class={team === c.name ? "rowWrapper active" : "rowWrapper"} onClick={() => { setTeam(c.name) }}>
+                        <div class={classNames('rowWrapper', { active: team === c.name })} onClick={() => setTeam(c.name)}>
                             <div>{i+1}</div>
                             <div class="name"><img src={c.club} width="30" height="30" />{c.name}</div>
                             <div>{c.plays}</div>
@@ -126,12 +127,16 @@ export default function RuLeague22 () {
                 <div class="ru-matches" ref={ref}>
                     <div class="ru-title">Расписание матчей для команды <span class="ru-bold">{team}</span></div>
                     {matches.filter(m => m.name1 === team || m.name2 === team).map(m => (
-                        <div class="ru-match">
+                        <div class={classNames('ru-match', {
+                            win: (m.goal1 !== '' && m.goal2 !== '') && ((m.name1 === team && m.goal1 > m.goal2) || (m.name2 === team && m.goal2 > m.goal1)),
+                            lose: (m.goal1 !== '' && m.goal2 !== '') && ((m.name1 === team && m.goal1 < m.goal2) || (m.name2 === team && m.goal2 < m.goal1)),
+                            draw: (m.goal1 !== '' && m.goal2 !== '') && m.goal1 === m.goal2
+                        })}>
                             <div>{m.stageName}</div>
                             <div class="ru-date">{m.day + ', ' + m.time}</div>
                             <div class="ru-score">
-                                <div class={m.name1 === team ? "ru-bold" : null}>{m.name1}</div>
-                                <div class={m.name2 === team ? "ru-bold" : null}>{m.name2}</div>
+                                <div class={classNames({ 'ru-bold': m.name1 === team })}>{m.name1}</div>
+                                <div class={classNames({ 'ru-bold': m.name2 === team })}>{m.name2}</div>
                                 {m.goal1 === '' && m.goal2 === '' ?
                                 <div class="ru-scheduled">Не начался</div> :
                                 <>
