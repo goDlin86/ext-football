@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useRef, useLayoutEffect } from 'react'
 import classNames from 'classnames'
+
 import BackButton from '../home/BackButton'
+import StageView from './StageView'
+
 import './style.css'
 
 export default function RuLeague22 () {
@@ -124,6 +127,8 @@ export default function RuLeague22 () {
                     ))}
                 </div>
 
+                <StageView matches={matches} />
+
                 <div class="ru-matches" ref={ref}>
                     <div class="ru-title">Расписание матчей для команды <span class="ru-bold">{team}</span></div>
                     {matches.filter(m => m.name1 === team || m.name2 === team).map(m => (
@@ -138,11 +143,11 @@ export default function RuLeague22 () {
                                 <div class={classNames({ 'ru-bold': m.name1 === team })}>{m.name1}</div>
                                 <div class={classNames({ 'ru-bold': m.name2 === team })}>{m.name2}</div>
                                 {m.goal1 === '' && m.goal2 === '' ?
-                                <div class="ru-scheduled">Не начался</div> :
-                                <>
-                                    <div>{m.goal1}</div>
-                                    <div>{m.goal2}</div>
-                                </>
+                                    <div class="ru-scheduled">Не начался</div> :
+                                    <>
+                                        <div>{m.goal1}</div>
+                                        <div>{m.goal2}</div>
+                                    </>
                                 }
                             </div>
                         </div>
