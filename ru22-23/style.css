@@ -24,17 +24,17 @@
     font-size: 16px;
 }
 .ru-logo {
-    width: 510px;
-    height: 77px;
+    width: 255px;
+    height: 38px;
     margin: 10px auto;
     background-image: url(logo.svg);
     background-position: 50%;
     background-repeat: no-repeat;
-    background-size: 510px 77px;
+    background-size: 255px 38px;
 }
 
 .ru-container {
-    height: 460px;
+    height: 520px;
     position: relative;
     overflow: scroll;
 }

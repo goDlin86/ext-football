@@ -18,7 +18,7 @@ export default function RuLeague22 () {
     }, [])
 
     useLayoutEffect(() => {
-        ref.current.scrollIntoView({ behavior: 'smooth' })
+        ref.current && ref.current.scrollIntoView({ behavior: 'smooth' })
     }, [team])
 
     const fetchData = async () => {
@@ -127,8 +127,9 @@ export default function RuLeague22 () {
                     ))}
                 </div>
 
-                <StageView matches={matches} />
+                {matches.length > 0 && <StageView matches={matches} />}
 
+                {team && 
                 <div class="ru-matches" ref={ref}>
                     <div class="ru-title">Расписание матчей для команды <span class="ru-bold">{team}</span></div>
                     {matches.filter(m => m.name1 === team || m.name2 === team).map(m => (
@@ -152,7 +153,7 @@ export default function RuLeague22 () {
                             </div>
                         </div>
                     ))}
-                </div>
+                </div>}
             </div>
         </div>
     )

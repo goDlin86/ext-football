@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import dayjs from 'dayjs'
+import weekOfYear from 'dayjs/plugin/weekOfYear'
+dayjs.extend(weekOfYear)
 
 export default function StageView ({ matches }) {
-    const [stage, setStage] = useState('1 тур')
+    const week = dayjs().week()
+    const i = matches.findIndex(m => dayjs(m.date).week() === week)
+
+    const [stage, setStage] = useState(matches[i].stageName)
     const [filterMatches, setMatches] = useState([])
 
     useEffect(() => {
