@@ -18,7 +18,7 @@
   }
 
 .ru-league {
-    background-color: rgb(241,248,254);
+    background: rgb(241,248,254); /* linear-gradient(90deg, #02AFFF 0%, #1F5BD7 100.04%); */
     padding: 10px;
     font-family: "ALS Sector Regular";
     font-size: 16px;
@@ -98,6 +98,9 @@
     align-items: center;
     text-align: center;
 }
+.ru-stage img {
+    vertical-align: middle;
+}
 .ru-title {
     grid-column: 1 / -1;
     font-size: 20px;
@@ -134,4 +137,13 @@
 }
 .ru-bold {
     font-family: "ALS Sector Bold";
+}
+.ru-leftteam {
+    text-align: right;
+}
+.ru-rightteam {
+    text-align: left;
+}
+.ru-time {
+    grid-column: span 3;
 }
