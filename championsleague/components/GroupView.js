@@ -3,33 +3,36 @@ import MatchInfo from './MatchInfo'
 import { groups } from './Groups'
 import GroupInfo from './GroupInfo'
 import GroupStage from './GroupStage'
-import { groupBy, groupInfo } from './helpers'
+import { groupBy, matchesInfo } from './helpers'
 
-export default function GroupView ({ matches }) {
-    //const currentMatchday = data.matches[0].season.currentMatchday
-    //const matches = data.matches.filter(m => m.matchday >= currentMatchday)
+export default function GroupView ({ matches, season }) {
+    //const currentMatchday = matches[0].season.currentMatchday
+    //const matches = matches.filter(m => m.matchday >= currentMatchday)
     
-    const groupsResult = groupInfo(matches.slice(93, 93+16*6))
+    const groupsResult = matchesInfo(matches.slice(93, 93+16*6))
     const groupsTable = []
-    groups.forEach(g => {
-        const commands = []
-        for (let index = 0; index < 4; index++) {
-            const i = groupsResult.findIndex(r => r.team === g.commands[index])
-            if (i >= 0) {
-                commands.push(groupsResult[i])
-            } else {
-                commands.push({
-                    team: g.commands[index],
-                    points: 0,
-                    plays: 0, 
-                    plusminus: 0,
-                    goals: 0
-                })
+    const groupsYear = groups.find(g => g.year === season)
+    if (groupsYear) {
+        groupsYear.groups.forEach(g => {
+            const commands = []
+            for (let index = 0; index < 4; index++) {
+                const i = groupsResult.findIndex(r => r.team === g.commands[index])
+                if (i >= 0) {
+                    commands.push(groupsResult[i])
+                } else {
+                    commands.push({
+                        team: g.commands[index],
+                        points: 0,
+                        plays: 0, 
+                        plusminus: 0,
+                        goals: 0
+                    })
+                }
             }
-        }
 
-        groupsTable.push({title: g.title, commands})
-    })
+            groupsTable.push({title: g.title, commands})
+        })
+    }
     groupsTable.map(g => {
         g.commands = g.commands.sort((a, b) => (b.points - a.points) || (b.plusminus - a.plusminus) || (b.goals - a.goals) || (b.plays - a.plays))
         return g

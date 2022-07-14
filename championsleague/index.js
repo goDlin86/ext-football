@@ -40,7 +40,7 @@ export default function ChampLeague ({ season }) {
                 </div>
             </div>
             <div class="cl-container">
-                {stage === 0 ? <GroupView matches={matches} /> : <PlayoffView matches={matches} />}
+                {stage === 0 ? <GroupView matches={matches} season={season} /> : <PlayoffView matches={matches} />}
             </div>
         </div>
     )

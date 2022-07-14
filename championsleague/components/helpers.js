@@ -16,7 +16,7 @@ export const groupBy = (items, key, secondKey) => items.reduce(
     []
 )
 
-export const groupInfo = (items) => items.reduce(
+export const matchesInfo = (items) => items.reduce(
     (result, item) => {
         if (item.status === 'FINISHED') {
             const homeTeam = { 
