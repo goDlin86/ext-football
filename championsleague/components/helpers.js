@@ -24,14 +24,16 @@ export const matchesInfo = (items) => items.reduce(
                 points: item.score.fullTime.home > item.score.fullTime.away ? 3 : item.score.fullTime.home < item.score.fullTime.away ? 0 : 1,
                 plays: 1, 
                 plusminus: item.score.fullTime.home - item.score.fullTime.away,
-                goals: item.score.fullTime.home
+                goals: item.score.fullTime.home,
+                group: item.group
             }
             const awayTeam = { 
                 team: item.awayTeam.name,
                 points: item.score.fullTime.away > item.score.fullTime.home ? 3 : item.score.fullTime.away < item.score.fullTime.home ? 0 : 1,
                 plays: 1, 
                 plusminus: item.score.fullTime.away - item.score.fullTime.home,
-                goals: item.score.fullTime.away
+                goals: item.score.fullTime.away,
+                group: item.group
             }
 
             let i = result.findIndex(r => r.team === homeTeam.team)
