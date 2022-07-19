@@ -3,8 +3,7 @@
   "version": "1.5.0",
   "description": "football matches show",
   "scripts": {
-    "clean": "rm -rf dist/",
-    "build": "parcel build ./home/index.html --public-url ./"
+    "build": "rm -rf dist/ && parcel build ./home/index.html --public-url ./"
   },
   "repository": {
     "type": "git",

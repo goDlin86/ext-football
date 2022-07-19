@@ -10,6 +10,7 @@ export default function RuLeague22 () {
     const [matches, setMatches] = useState([])
     const [table, setTable] = useState([])
     const [team, setTeam] = useState(null)
+    const [stage, setStage] = useState(null)
 
     const ref = useRef(null)
 
@@ -36,6 +37,7 @@ export default function RuLeague22 () {
         
         console.log(data)
 
+        setStage(data.curTur)
         setMatches(data.contents)
      
         const t = data.contents.reduce((result, item) => {
@@ -127,7 +129,7 @@ export default function RuLeague22 () {
                     ))}
                 </div>
 
-                {matches.length > 0 && <StageView matches={matches} />}
+                {matches.length > 0 && <StageView matches={matches} stage={stage} />}
 
                 {team && 
                 <div class="ru-matches" ref={ref}>
