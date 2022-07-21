@@ -1,0 +1,32 @@
+@font-face {
+    font-family: "Qatar2022 Heavy"; 
+    src: url("qatar-2022-font/Qatar2022-Heavy.otf"); 
+    src: url("qatar-2022-font/Qatar2022-Heavy.otf?#iefix") format("embedded-opentype"), 
+    url("qatar-2022-font/Qatar2022-Heavy.woff2") format("woff2"), 
+    url("qatar-2022-font/Qatar2022-Heavy.woff") format("woff");
+}
+@font-face {
+    font-family: "Qatar2022 Bold";
+    src: url("qatar-2022-font/Qatar2022-Bold.otf"); 
+    src: url("qatar-2022-font/Qatar2022-Bold.otf?#iefix") format("embedded-opentype"), 
+    url("qatar-2022-font/Qatar2022-Bold.woff2") format("woff2"), 
+    url("qatar-2022-font/Qatar2022-Bold.woff") format("woff");
+}
+@font-face {
+    font-family: "Qatar2022";
+    src: url("qatar-2022-font/Qatar2022-Medium.otf"); 
+    src: url("qatar-2022-font/Qatar2022-Medium.otf?#iefix") format("embedded-opentype"), 
+    url("qatar-2022-font/Qatar2022-Medium.woff2") format("woff2"), 
+    url("qatar-2022-font/Qatar2022-Medium.woff") format("woff");
+}
+
+.worldcup {
+    background-color: rgb(85,5,101);
+    padding: 10px;
+    font-size: 16px;
+    color: rgb(249,71,2);
+    font-family: "Qatar2022";
+}
+.worldcup h1 {
+    font-family: "Qatar2022 Heavy";
+}

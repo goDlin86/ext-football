@@ -4,6 +4,7 @@ import { Link, Router } from 'react-chrome-extension-router'
 import EURO2020 from '../euro2020/index'
 import ChampLeague from '../championsleague/index'
 import RuLeague22 from  '../ru22-23/index'
+import WorldCup from '../worldcup2022'
 
 const App = () => {
     return (
@@ -11,6 +12,9 @@ const App = () => {
             <div class="menu">
                 <Link component={EURO2020}>
                     EURO 2020
+                </Link>
+                <Link component={WorldCup}>
+                    World Cup 2022
                 </Link>
                 <Link component={ChampLeague} props={{ season: 2021 }}>
                     Champions League 2021-2022

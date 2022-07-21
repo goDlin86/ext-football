@@ -39,7 +39,7 @@ export default function RuLeague22 () {
 
         setStage(data.curTur)
         setMatches(data.contents)
-     
+    
         const t = data.contents.reduce((result, item) => {
             let i = result.findIndex(r => r.name === item.name1)
             if (i < 0) {
