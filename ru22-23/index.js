@@ -62,8 +62,8 @@ export default function RuLeague22 () {
                 result[i].w += item.goal1 > item.goal2 ? 1 : 0
                 result[i].d += item.goal1 == item.goal2 ? 1 : 0
                 result[i].l += item.goal1 < item.goal2 ? 1 : 0
-                result[i].z += item.goal1
-                result[i].p += item.goal2
+                result[i].z += parseInt(item.goal1)
+                result[i].p += parseInt(item.goal2)
                 result[i].points += item.goal1 > item.goal2 ? 3 : item.goal1 < item.goal2 ? 0 : 1
             }
 
@@ -88,8 +88,8 @@ export default function RuLeague22 () {
                 result[i].w += item.goal2 > item.goal1 ? 1 : 0
                 result[i].d += item.goal2 == item.goal1 ? 1 : 0
                 result[i].l += item.goal2 < item.goal1 ? 1 : 0
-                result[i].z += item.goal2
-                result[i].p += item.goal1
+                result[i].z += parseInt(item.goal2)
+                result[i].p += parseInt(item.goal1)
                 result[i].points += item.goal2 > item.goal1 ? 3 : item.goal2 < item.goal1 ? 0 : 1
             }
 

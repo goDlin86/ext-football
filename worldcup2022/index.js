@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
+
+import GroupView from './GroupView'
 import BackButton from '../home/BackButton'
+
 import './style.css'
 
 export default function WorldCup () {
@@ -12,7 +15,7 @@ export default function WorldCup () {
     const fetchData = async () => {
         chrome.storage.local.get(['football_api_token'], async ({ football_api_token }) => {
             const resp = await fetch(
-                'https://api.football-data.org/v4/competitions/WC/matches',//?season=2022
+                'https://api.football-data.org/v4/competitions/WC/matches',
                 { headers: { 'X-Auth-Token': football_api_token } }
             )
             const data = await resp.json()
@@ -26,8 +29,11 @@ export default function WorldCup () {
         <div class="worldcup">
             <BackButton />
 
-            <img src={new URL('./logo.webp', import.meta.url)} alt="logo" />
-            <h1>World Cup 2022</h1>
+            <div class="header">
+                <img src={new URL('./logo.webp', import.meta.url)} alt="logo" />
+            </div>
+            
+            <GroupView matches={matches.filter(m => m.stage === 'GROUP_STAGE')} />
         </div>
     )
 }

@@ -41,7 +41,7 @@ export default function ChampLeague ({ season }) {
             </div>
             <div class="cl-container">
                 {stage === 0 ? 
-                    <GroupView matches={matches.filter(m => m.stage === 'GROUP_STAGE')} season={season} /> : 
+                    <GroupView matches={matches.filter(m => m.stage === 'GROUP_STAGE')} /> : 
                     <PlayoffView matches={matches.slice(93+16*6)} />
                 }
             </div>
