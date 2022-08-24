@@ -1,9 +1,10 @@
 import React from 'react'
 import { render, createRoot } from 'react-dom'
 import { Link, Router } from 'react-chrome-extension-router'
-import EURO2020 from '../euro2020/index'
-import ChampLeague from '../championsleague/index'
-import RuLeague22 from  '../ru22-23/index'
+import EURO2020 from '../euro2020'
+import ChampLeague from '../championsleague'
+import RuLeague22 from  '../ru22-23'
+import RuCup22 from '../rucup22-23'
 import WorldCup from '../worldcup2022'
 
 const App = () => {
@@ -24,6 +25,9 @@ const App = () => {
                 </Link>
                 <Link component={RuLeague22}>
                     Чемпионат России 2022-2023
+                </Link>
+                <Link component={RuCup22}>
+                    Кубок России 2022-2023
                 </Link>
             </div>
         </Router>

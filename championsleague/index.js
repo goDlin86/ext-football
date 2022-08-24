@@ -5,7 +5,7 @@ import BackButton from '../home/BackButton'
 import './style.css'
 
 export default function ChampLeague ({ season }) {
-    const [stage, setStage] = useState(1)
+    const [stage, setStage] = useState(0)
     const [matches, setMatches] = useState([])
 
     useEffect(() => {
@@ -23,6 +23,7 @@ export default function ChampLeague ({ season }) {
 
             if (data.resultSet.count > 0) {              
                 setMatches(data.matches)
+                setStage(data.resultSet.count > 93+16*6 ? 1 : 0)
             }
         })
     }
