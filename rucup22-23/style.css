@@ -1,0 +1,62 @@
+@font-face {
+	font-family: 'Proxima Nova Rg';
+	src: url('ProximaNova/ProximaNova-Regular.eot');
+	src: local('Proxima Nova Regular'), local('ProximaNova-Regular'),
+	    url('ProximaNova/ProximaNova-Regular.eot?#iefix') format('embedded-opentype'),
+	    url('ProximaNova/ProximaNova-Regular.woff') format('woff'),
+	    url('ProximaNova/ProximaNova-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Proxima Nova Bl';
+	src: url('ProximaNova/ProximaNova-Black.eot');
+	src: local('Proxima Nova Black'), local('ProximaNova-Black'),
+		url('ProximaNova/ProximaNova-Black.eot?#iefix') format('embedded-opentype'),
+		url('ProximaNova/ProximaNova-Black.woff') format('woff'),
+		url('ProximaNova/ProximaNova-Black.ttf') format('truetype');
+	font-weight: 900;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Proxima Nova Lt';
+	src: url('ProximaNova/ProximaNova-Light.eot');
+	src: local('Proxima Nova Light'), local('ProximaNova-Light'),
+		url('ProximaNova/ProximaNova-Light.eot?#iefix') format('embedded-opentype'),
+		url('ProximaNova/ProximaNova-Light.woff') format('woff'),
+		url('ProximaNova/ProximaNova-Light.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+
+.rucup {
+    background-color: #b50119;
+    padding: 10px;
+    font-family: "Proxima Nova Rg";
+    font-size: 16px;
+}
+.rucup-logo {
+    width: 300px;
+    height: 106px;
+    margin: 10px auto;
+    background-image: url(fonbet-cup-logo.svg);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: 300px 106px;
+}
+.rucup-container {
+    height: 454px;
+    position: relative;
+    overflow: scroll;
+}
+.rucup-table {
+	background-color: white;
+	padding: 20px;
+	display: grid;
+    grid-template-columns: 1fr 50px 50px 20px 50px 50px 1fr;
+    align-items: center;
+    text-align: center;
+}
+.rucup-table img {
+    vertical-align: middle;
+}

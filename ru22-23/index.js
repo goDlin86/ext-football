@@ -102,7 +102,7 @@ export default function RuLeague22 () {
     return (
         <div class="ru-league">
             <BackButton />
-            <div class="ru-logo"></div>
+            <div class="ru-logo" />
             <div class="ru-container">
                 <div class="ru-table">
                     <div class="header">

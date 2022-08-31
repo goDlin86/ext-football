@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import BackButton from '../home/BackButton'
 
-//import './style.css'
+import './style.css'
 
 export default function RuCup22 () {
     const [matches, setMatches] = useState([])
@@ -13,29 +13,41 @@ export default function RuCup22 () {
 
     const fetchData = async () => {
         const resp = await fetch(
-            'https://premierliga.ru/ajax/match/', 
+            'https://v3.football.api-sports.io/fixtures?league=237&season=2022',
             {
+                'method': 'GET',
                 'headers': {
-                    'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                },
-                'body': 'ajaxAction=getHeaderCalendar&tournament=2',
-                'method': 'POST'
+                    'x-rapidapi-host': 'v3.football.api-sports.io',
+                    'x-rapidapi-key': 'c5d42a35b79e4874a8263b9ecf14a0b9'
+                }
             }
         )
         const data = await resp.json()
         
         console.log(data)
+
+        setMatches(data.response)
     }
 
     return (
         <div class="rucup">
             <BackButton />
-
-            <div class="header">
-                <img src="" alt="logo" />
+            <div class="rucup-logo" />
+            <div class="rucup-container">
+                <div class="rucup-table">
+                    {matches.map(m => (
+                        <>
+                            <div class="ru-leftteam">{m.teams.home.name}</div>
+                            <div><img src={m.teams.home.logo} width="30" height="30" /></div>
+                            <div>{m.score.fulltime.home}</div>
+                            <div>-</div>
+                            <div>{m.score.fulltime.away}</div>
+                            <div><img src={m.teams.away.logo } width="30" height="30" /></div>
+                            <div class="ru-rightteam">{m.teams.away.name}</div>
+                        </>
+                    ))}
+                </div>
             </div>
-            
-            
         </div>
     )
 }
