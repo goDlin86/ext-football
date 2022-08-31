@@ -12,21 +12,23 @@ export default function RuCup22 () {
     }, [])
 
     const fetchData = async () => {
-        const resp = await fetch(
-            'https://v3.football.api-sports.io/fixtures?league=237&season=2022',
-            {
-                'method': 'GET',
-                'headers': {
-                    'x-rapidapi-host': 'v3.football.api-sports.io',
-                    'x-rapidapi-key': 'c5d42a35b79e4874a8263b9ecf14a0b9'
+        chrome.storage.local.get(['api_sports'], async ({ api_sports }) => {
+            const resp = await fetch(
+                'https://v3.football.api-sports.io/fixtures?league=237&season=2022',
+                {
+                    'method': 'GET',
+                    'headers': {
+                        'x-rapidapi-host': 'v3.football.api-sports.io',
+                        'x-rapidapi-key': api_sports
+                    }
                 }
-            }
-        )
-        const data = await resp.json()
-        
-        console.log(data)
+            )
+            const data = await resp.json()
+            
+            console.log(data)
 
-        setMatches(data.response)
+            setMatches(data.response)
+        })
     }
 
     return (
