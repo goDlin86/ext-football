@@ -24,10 +24,21 @@ export default function RuCup22 () {
                 }
             )
             const data = await resp.json()
-            
             console.log(data)
 
-            setMatches(data.response)
+            setMatches(data.response
+                .filter(m => m.league.round.includes('Premier League Path'))
+                .reduce((result, item, index) => {
+                    const i = result.findIndex(r => r.round === Math.ceil((index+1)/8))
+                    if (i >= 0) {
+                        result[i].matches.push(item)
+                    } else {
+                        result.push({ round: Math.ceil((index+1)/8), matches: [item] })
+                    }
+
+                    return result
+                }, [])
+            )
         })
     }
 
@@ -37,15 +48,21 @@ export default function RuCup22 () {
             <div class="rucup-logo" />
             <div class="rucup-container">
                 <div class="rucup-table">
-                    {matches.map(m => (
+                    {matches.map(r => (
                         <>
-                            <div class="ru-leftteam">{m.teams.home.name}</div>
-                            <div><img src={m.teams.home.logo} width="30" height="30" /></div>
-                            <div>{m.score.fulltime.home}</div>
-                            <div>-</div>
-                            <div>{m.score.fulltime.away}</div>
-                            <div><img src={m.teams.away.logo } width="30" height="30" /></div>
-                            <div class="ru-rightteam">{m.teams.away.name}</div>
+                            <div class="ru-title">{r.round + ' тур'}</div>
+                            {r.matches.map(m => (
+                                <>
+                                    <div class="ru-scheduled">{new Date(m.fixture.date).toLocaleDateString('ru-RU', { weekday: 'short', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
+                                    <div class="ru-leftteam">{m.teams.home.name}</div>
+                                    <div><img src={m.teams.home.logo} width="30" height="30" /></div>
+                                    <div>{m.score.fulltime.home}</div>
+                                    <div>-</div>
+                                    <div>{m.score.fulltime.away}</div>
+                                    <div><img src={m.teams.away.logo } width="30" height="30" /></div>
+                                    <div class="ru-rightteam">{m.teams.away.name}</div>
+                                </>
+                            ))}
                         </>
                     ))}
                 </div>
