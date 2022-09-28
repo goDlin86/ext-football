@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import GroupView from './components/GroupView'
 import PlayoffView from './components/PlayoffView'
 import BackButton from '../home/BackButton'
+
 import './style.css'
 
 export default function ChampLeague ({ season }) {

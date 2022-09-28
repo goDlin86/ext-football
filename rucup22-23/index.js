@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
-
 import BackButton from '../home/BackButton'
+
+import classNames from 'classnames'
+
+import CyrillicToTranslit from 'cyrillic-to-translit-js'
+const cyrillicToTranslit = new CyrillicToTranslit()
 
 import './style.css'
 
 export default function RuCup22 () {
     const [matches, setMatches] = useState([])
+    const [activeTeam, setTeam] = useState(null)
 
     useEffect(() => {
         fetchData()
@@ -42,6 +47,10 @@ export default function RuCup22 () {
         })
     }
 
+    const selectTeam = (team) => {
+        setTeam(team !== activeTeam ? team : null)
+    }
+
     return (
         <div class="rucup">
             <BackButton />
@@ -51,16 +60,22 @@ export default function RuCup22 () {
                     {matches.map(r => (
                         <>
                             <div class="ru-title">{r.round + ' тур'}</div>
-                            {r.matches.map(m => (
+                            {r.matches.filter(m => activeTeam ? m.teams.home.name === activeTeam || m.teams.away.name === activeTeam : true).map(m => (
                                 <>
-                                    <div class="ru-scheduled">{new Date(m.fixture.date).toLocaleDateString('ru-RU', { weekday: 'short', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
-                                    <div class="ru-leftteam">{m.teams.home.name}</div>
+                                    <div class="ru-scheduled">
+                                        {new Date(m.fixture.date).toLocaleDateString('ru-RU', { weekday: 'short', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                                    </div>
+                                    <div class={classNames('ru-leftteam', 'clicked', {active: m.teams.home.name === activeTeam})} onClick={() => selectTeam(m.teams.home.name)}>
+                                        {cyrillicToTranslit.reverse(m.teams.home.name)}
+                                    </div>
                                     <div><img src={m.teams.home.logo} width="30" height="30" /></div>
                                     <div>{m.score.fulltime.home}</div>
                                     <div>-</div>
                                     <div>{m.score.fulltime.away}</div>
                                     <div><img src={m.teams.away.logo } width="30" height="30" /></div>
-                                    <div class="ru-rightteam">{m.teams.away.name}</div>
+                                    <div class={classNames('ru-rightteam', 'clicked', {active: m.teams.away.name === activeTeam})} onClick={() => selectTeam(m.teams.away.name)}>
+                                        {cyrillicToTranslit.reverse(m.teams.away.name)}
+                                    </div>
                                 </>
                             ))}
                         </>

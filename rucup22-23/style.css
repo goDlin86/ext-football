@@ -61,3 +61,10 @@
 .rucup-table img {
     vertical-align: middle;
 }
+.clicked {
+	cursor: pointer;
+	transition: .3s background-color;
+}
+.clicked:hover, .clicked.active {
+	background-color: aliceblue;
+}
