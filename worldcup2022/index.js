@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import GroupView from './GroupView'
+import MatchDayView from './MatchDayView'
 import BackButton from '../home/BackButton'
 
 import './style.css'
@@ -34,6 +35,7 @@ export default function WorldCup () {
             </div>
             
             <GroupView matches={matches.filter(m => m.stage === 'GROUP_STAGE')} />
+            <MatchDayView matches={matches.filter(m => m.stage === 'GROUP_STAGE')} />
         </div>
     )
 }

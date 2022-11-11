@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/goDlin86/euro2021playoff.git"
+    "url": "git+https://github.com/goDlin86/ext-football.git"
   },
   "keywords": [
     "chrome",
@@ -17,9 +17,9 @@
   "author": "goDlin",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/goDlin86/euro2021playoff/issues"
+    "url": "https://github.com/goDlin86/ext-football/issues"
   },
-  "homepage": "https://github.com/goDlin86/euro2021playoff#readme",
+  "homepage": "https://github.com/goDlin86/ext-football#readme",
   "dependencies": {
     "classnames": "^2.3.1",
     "cyrillic-to-translit-js": "^3.2.1",

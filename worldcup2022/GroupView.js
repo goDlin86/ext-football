@@ -26,6 +26,7 @@ export default function GroupView ({ matches }) {
 
     return (
         <>
+            <h1>Groups</h1>
             <div className="grid">
                 {groupsTable.map(group => (
                     <div className="worldgroup">
@@ -33,7 +34,7 @@ export default function GroupView ({ matches }) {
                         <div className="gridgroup">
                             {group.commands.map(c => (
                                 <>
-                                    <div><img src={c.crest} width="30" height="30" />{c.team}</div>
+                                    <div><img src={c.crest} width="30" height="20" />{c.team}</div>
                                     <div>{c.plays}</div>
                                     <div>{c.points}</div>
                                 </>

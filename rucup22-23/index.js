@@ -60,7 +60,7 @@ export default function RuCup22 () {
                     {matches.map(r => (
                         <>
                             <div class="ru-title">{r.round + ' тур'}</div>
-                            {r.matches.filter(m => activeTeam ? m.teams.home.name === activeTeam || m.teams.away.name === activeTeam : true).map(m => (
+                            {r.matches.filter(m => activeTeam === null || m.teams.home.name === activeTeam || m.teams.away.name === activeTeam).map(m => (
                                 <>
                                     <div class="ru-scheduled">
                                         {new Date(m.fixture.date).toLocaleDateString('ru-RU', { weekday: 'short', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}

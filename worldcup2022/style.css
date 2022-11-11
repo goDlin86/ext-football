@@ -30,22 +30,46 @@
 .worldcup .header {
     text-align: center;
 }
+.worldcup .header img {
+    height: 150px;
+}
 .worldcup .grid {
     margin-top: 10px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     /* grid-template-rows: repeat(8, 1fr); */
-    /* grid-auto-flow: column; */
     gap: 10px;
     align-items: center;
 }
 .worldcup .gridgroup {
+    padding: 5px;
+    border-radius: 5px;
     display: grid;
-    grid-template-columns: 1fr 20px 20px;
+    grid-template-columns: 1fr 15px 15px;
     align-items: center;
     background-color: rgba(255,255,255,0.1);
+    row-gap: 3px;
 }
 .worldcup img {
     vertical-align: middle;
     margin-right: 10px;
+}
+
+.wc-matches {
+    margin-top: 20px;
+}
+.wc-match {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgba(255,255,255,0.1);
+    display: grid;
+    grid-template-columns: 1fr 20px;
+    row-gap: 3px;
+}
+.wc-date {
+    color: rgba(249,71,2,0.7);
+    font-size: 12px;
+}
+.wc-right {
+    text-align: right;
 }
