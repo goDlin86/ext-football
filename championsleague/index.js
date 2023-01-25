@@ -24,7 +24,7 @@ export default function ChampLeague ({ season }) {
 
             if (data.resultSet.count > 0) {              
                 setMatches(data.matches)
-                setStage(data.resultSet.count > 93+16*6 ? 1 : 0)
+                setStage(data.matches.findIndex(m => m.stage.startsWith('LAST_')) === -1 ? 0 : 1)
             }
         })
     }
@@ -44,7 +44,7 @@ export default function ChampLeague ({ season }) {
             <div class="cl-container">
                 {stage === 0 ? 
                     <GroupView matches={matches.filter(m => m.stage === 'GROUP_STAGE')} /> : 
-                    <PlayoffView matches={matches.slice(93+16*6)} />
+                    <PlayoffView matches={matches.slice(matches.findIndex(m => m.stage.startsWith('LAST_')))} />
                 }
             </div>
         </div>

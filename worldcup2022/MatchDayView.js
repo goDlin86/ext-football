@@ -2,13 +2,13 @@ import React from 'react'
 import dayjs from 'dayjs'
 import { groupBy } from '../championsleague/components/helpers'
 
-export default function MatchDayView ({ matches }) {   
+export default function MatchDayView ({ matches, title }) {   
     const matchesByDay = groupBy(matches, 'matchday', 'utcDate')
     console.log(matchesByDay)
 
     return (
         <div className="wc-matches">
-            <h1>Matches</h1>
+            <h1>{title}</h1>
             <div className="grid">
                 {matchesByDay.map(day => (
                     <>

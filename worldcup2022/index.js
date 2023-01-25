@@ -34,8 +34,9 @@ export default function WorldCup () {
                 <img src={new URL('./logo.webp', import.meta.url)} alt="logo" />
             </div>
             
+            <MatchDayView matches={matches.filter(m => m.stage !== 'GROUP_STAGE')} title='Play-off matches' />
             <GroupView matches={matches.filter(m => m.stage === 'GROUP_STAGE')} />
-            <MatchDayView matches={matches.filter(m => m.stage === 'GROUP_STAGE')} />
+            <MatchDayView matches={matches.filter(m => m.stage === 'GROUP_STAGE')} title='Matches' />
         </div>
     )
 }
