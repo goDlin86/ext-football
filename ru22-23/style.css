@@ -18,7 +18,7 @@
 }
 
 .ru-league {
-    background: rgb(241,248,254); /* linear-gradient(90deg, #02AFFF 0%, #1F5BD7 100.04%); */
+    background: #f1f8fe; /* linear-gradient(90deg, #02AFFF 0%, #1F5BD7 100.04%); */
     padding: 10px;
     font-family: "ALS Sector Regular";
     font-size: 16px;
@@ -109,16 +109,19 @@
 .ru-match {
     padding: 5px;
     border-radius: 10px;
-    border: 1px solid rgba(0,0,0,0.15);
+    box-shadow: 0 6px 20px rgb(0 16 61 / 7%);
 }
 .ru-match.win {
-    background-color: rgba(0,255,0,0.08);
+    background-color: rgba(0, 220, 18, 0.05);
+    box-shadow: 0 6px 20px rgba(0, 220, 18, 0.2);
 }
 .ru-match.lose {
-    background-color: rgba(255,0,0,0.08);
+    background-color: rgba(213, 1, 1, 0.05);
+    box-shadow: 0 6px 20px rgba(213, 1, 1, 0.15);
 }
 .ru-match.draw {
-    background-color: rgba(0,0,255,0.08);
+    background-color: rgba(0, 59, 223, 0.05);
+    box-shadow: 0 6px 20px rgba(0, 59, 223, 0.1);
 }
 .ru-date {
     margin: 5px 0;
