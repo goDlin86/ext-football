@@ -6,7 +6,7 @@ import StageView from './StageView'
 
 import './style.css'
 
-export default function RuLeague22 () {
+export default function RuLeague () {
     const [matches, setMatches] = useState([])
     const [table, setTable] = useState([])
     const [team, setTeam] = useState(null)
