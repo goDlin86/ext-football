@@ -8,7 +8,7 @@ const cyrillicToTranslit = new CyrillicToTranslit()
 
 import './style.css'
 
-export default function RuCup22 () {
+export default function RuCup ({ season }) {
     const [matches, setMatches] = useState([])
     const [activeTeam, setTeam] = useState(null)
 
@@ -19,7 +19,7 @@ export default function RuCup22 () {
     const fetchData = async () => {
         chrome.storage.local.get(['api_sports'], async ({ api_sports }) => {
             const resp = await fetch(
-                'https://v3.football.api-sports.io/fixtures?league=237&season=2022',
+                'https://v3.football.api-sports.io/fixtures?league=237&season=' + season,
                 {
                     'method': 'GET',
                     'headers': {
