@@ -21,7 +21,7 @@ export const matchesInfo = (items) => items.reduce(
         const homeTeam = { 
             team: item.homeTeam.name,
             crest: item.homeTeam.crest,
-            points: !item.score.fullTime.home ? 0 : item.score.fullTime.home > item.score.fullTime.away ? 3 : item.score.fullTime.home < item.score.fullTime.away ? 0 : 1,
+            points: item.score.fullTime.home === null ? 0 : item.score.fullTime.home > item.score.fullTime.away ? 3 : item.score.fullTime.home < item.score.fullTime.away ? 0 : 1,
             plays: item.score.fullTime.home !== null ? 1 : 0, 
             plusminus: item.score.fullTime.home - item.score.fullTime.away,
             goals: parseInt(item.score.fullTime.home) || 0,
@@ -30,7 +30,7 @@ export const matchesInfo = (items) => items.reduce(
         const awayTeam = { 
             team: item.awayTeam.name,
             crest: item.awayTeam.crest,
-            points: !item.score.fullTime.away ? 0 : item.score.fullTime.away > item.score.fullTime.home ? 3 : item.score.fullTime.away < item.score.fullTime.home ? 0 : 1,
+            points: item.score.fullTime.away === null ? 0 : item.score.fullTime.away > item.score.fullTime.home ? 3 : item.score.fullTime.away < item.score.fullTime.home ? 0 : 1,
             plays: item.score.fullTime.away !== null ? 1 : 0, 
             plusminus: item.score.fullTime.away - item.score.fullTime.home,
             goals: parseInt(item.score.fullTime.away) || 0,
