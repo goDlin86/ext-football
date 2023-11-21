@@ -27,7 +27,7 @@ export default function StageView ({ matches, stage }) {
                 <>
                     <div  class="ru-title ru-date">{item.day}</div>
                     {item.matches.map(m => (
-                        <>
+                        <a class="ru-matchresult" href={"https://premierliga.ru" + m.url} target='_blank'>
                             <div class="ru-leftteam">{m.name1}</div>
                             <div><img src={m.club1} width="30" height="30" /></div>
                             {m.goal1 === "" && m.goal2 === "" ? 
@@ -40,7 +40,7 @@ export default function StageView ({ matches, stage }) {
                             }
                             <div><img src={m.club2} width="30" height="30" /></div>
                             <div class="ru-rightteam">{m.name2}</div>
-                        </>
+                        </a>
                     ))}
                 </>
             ))}
