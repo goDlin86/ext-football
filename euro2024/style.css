@@ -1,0 +1,64 @@
+@font-face {
+  font-family: 'UEFA Euro';
+  src: local('UEFA Euro Book'), local('UEFA-Euro-Book'),
+      url('UEFAEuro-Book.woff2') format('woff2'),
+      url('UEFAEuro-Book.woff') format('woff'),
+      url('UEFAEuro-Book.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'UEFA Euro';
+  src: local('UEFA Euro Heavy Narrow'), local('UEFA-Euro-Heavy-Narrow'),
+      url('UEFAEuro-HeavyNarrow.woff2') format('woff2'),
+      url('UEFAEuro-HeavyNarrow.woff') format('woff'),
+      url('UEFAEuro-HeavyNarrow.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+.euro2024 {
+  font-family: 'UEFA Euro', sans-serif;
+  background-color: #143cdb;
+  padding: 10px;
+  color: white;
+  font-size: 14px;
+}
+.euro2024-logo {
+  background-image: url(euro2024.png);
+  width: 152;
+  height: 190;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  margin: auto;
+}
+.euro2024-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+.euro2024-group {
+  border-radius: 10px;
+  border: 1px white solid;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 15px 15px;
+  align-items: center;
+  row-gap: 5px;
+}
+.euro2024-match {
+  border-radius: 10px;
+  border: 1px white solid;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 20px;
+  row-gap: 5px;
+}
+.euro2024-date {
+  color: #6d97bb;
+  font-size: 12px;
+}
+.euro2024 img {
+  vertical-align: middle;
+  margin-right: 10px;
+}

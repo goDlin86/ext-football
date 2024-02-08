@@ -6,6 +6,7 @@ import ChampLeague from '../championsleague'
 import RuLeague from  '../ru'
 import RuCup from '../rucup'
 import WorldCup from '../worldcup2022'
+import EURO2024 from '../euro2024'
 
 const App = () => {
     return (
@@ -34,6 +35,9 @@ const App = () => {
                 </Link>
                 <Link component={RuCup} props={{ season: 2023 }}>
                     Кубок России 2023-2024
+                </Link>
+                <Link component={EURO2024}>
+                    EURO 2024
                 </Link>
             </div>
         </Router>
