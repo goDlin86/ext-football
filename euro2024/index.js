@@ -31,6 +31,7 @@ export default function EURO2024 () {
     <div className="euro2024">
       <BackButton />
       <div className="euro2024-logo" />
+      <MatchDayView matches={matches.filter(m => m.stage !== 'GROUP_STAGE')} title='Play-off matches' />
       <GroupView matches={matches.filter(m => m.stage === 'GROUP_STAGE')} />
       <MatchDayView matches={matches.filter(m => m.stage === 'GROUP_STAGE')} title='Matches' />
     </div>
