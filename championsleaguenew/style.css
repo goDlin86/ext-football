@@ -1,0 +1,8 @@
+.group::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  left: 528px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0), rgb(18,56,216) 20%, rgb(18,56,216) 80%, rgba(0,0,0,0));
+}

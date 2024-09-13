@@ -3,6 +3,7 @@ import { render, createRoot } from 'react-dom'
 import { Link, Router } from 'react-chrome-extension-router'
 import EURO2020 from '../euro2020'
 import ChampLeague from '../championsleague'
+import ChampLeagueNew from '../championsleaguenew'
 import RuLeague from  '../ru'
 import RuCup from '../rucup'
 import WorldCup from '../worldcup2022'
@@ -18,6 +19,9 @@ const App = () => {
                 <Link component={WorldCup}>
                     World Cup 2022
                 </Link>
+                <Link component={EURO2024}>
+                    EURO 2024
+                </Link>
                 <Link component={ChampLeague} props={{ season: 2021 }}>
                     Champions League 2021-2022
                 </Link>
@@ -26,6 +30,9 @@ const App = () => {
                 </Link>
                 <Link component={ChampLeague} props={{ season: 2023 }}>
                     Champions League 2023-2024
+                </Link>
+                <Link component={ChampLeagueNew} props={{ season: 2024 }}>
+                    Champions League 2024-2025
                 </Link>
                 <Link component={RuLeague}>
                     Чемпионат России
@@ -36,8 +43,8 @@ const App = () => {
                 <Link component={RuCup} props={{ season: 2023 }}>
                     Кубок России 2023-2024
                 </Link>
-                <Link component={EURO2024}>
-                    EURO 2024
+                <Link component={RuCup} props={{ season: 2024 }}>
+                    Кубок России 2024-2025
                 </Link>
             </div>
         </Router>
