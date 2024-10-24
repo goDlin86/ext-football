@@ -22,9 +22,6 @@ const App = () => {
                 <Link component={EURO2024}>
                     EURO 2024
                 </Link>
-                <Link component={ChampLeague} props={{ season: 2021 }}>
-                    Champions League 2021-2022
-                </Link>
                 <Link component={ChampLeague} props={{ season: 2022 }}>
                     Champions League 2022-2023
                 </Link>
@@ -37,14 +34,8 @@ const App = () => {
                 <Link component={RuLeague}>
                     Чемпионат России
                 </Link>
-                <Link component={RuCup} props={{ season: 2022 }}>
-                    Кубок России 2022-2023
-                </Link>
-                <Link component={RuCup} props={{ season: 2023 }}>
-                    Кубок России 2023-2024
-                </Link>
                 <Link component={RuCup} props={{ season: 2024 }}>
-                    Кубок России 2024-2025
+                    Кубок России
                 </Link>
             </div>
         </Router>
