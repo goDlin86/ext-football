@@ -6,3 +6,16 @@
   left: 528px;
   background: linear-gradient(to bottom, rgba(0,0,0,0), rgb(18,56,216) 20%, rgb(18,56,216) 80%, rgba(0,0,0,0));
 }
+
+.group > .line {
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(to right, rgba(0,0,0,0), rgb(18,56,216) 20%, rgb(18,56,216) 80%, rgba(0,0,0,0));
+}
+.group > .nextround {
+  top: 221px;
+}
+.group > .playoff {
+  top: 604px;
+}

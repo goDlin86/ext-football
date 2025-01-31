@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, createRoot } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { Link, Router } from 'react-chrome-extension-router'
 import EURO2020 from '../euro2020'
 import ChampLeague from '../championsleague'

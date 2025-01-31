@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import LeagueView from './components/LeagueView'
+import PlayoffView from './components/PlayoffView'
 import BackButton from '../home/BackButton'
 
 import '../championsleague/style.css'
@@ -44,8 +45,7 @@ export default function ChampLeagueNew ({ season }) {
       <div class="cl-container">
         {stage === 0 ? 
           <LeagueView matches={matches.filter(m => m.stage === 'LEAGUE_STAGE')} /> : 
-          <div>Playoff Stage</div>
-          /*<PlayoffView matches={matches.slice(matches.findIndex(m => m.stage.startsWith('LAST_')))} />*/
+          <PlayoffView matches={matches.slice(matches.findIndex(m => m.stage === 'PLAYOFFS'))} />
         }
       </div>
     </div>
