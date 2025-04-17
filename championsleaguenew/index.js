@@ -25,7 +25,7 @@ export default function ChampLeagueNew ({ season }) {
 
       if (data.resultSet.count > 0) {              
         setMatches(data.matches)
-        setStage(data.resultSet.played > 144 ? 1 : 0)
+        setStage(data.resultSet.played > 143 ? 1 : 0)
       }
     })
   }
