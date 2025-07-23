@@ -4,10 +4,19 @@ import classNames from 'classnames'
 import BackButton from '../home/BackButton'
 import StageView from './StageView'
 
+import dayjs from 'dayjs'
+import 'dayjs/locale/ru'
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
+dayjs.locale('ru')
+dayjs.extend(utc)
+dayjs.extend(timezone)
+
 import './style.css'
 
 export default function RuLeague () {
-    const [matches, setMatches] = useState([])
+    const [data, setData] = useState([])
+    const [clubs, setClubs] = useState([])
     const [table, setTable] = useState([])
     const [team, setTeam] = useState(null)
     const [stage, setStage] = useState(null)
@@ -23,29 +32,38 @@ export default function RuLeague () {
     }, [team])
 
     const fetchData = async () => {
+        const r = await fetch(
+            'https://api.premierliga.ru/api/getClubs', 
+            { 
+                method: 'POST', 
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify({ tournament: null }),
+            }
+        )
+        const clubs = await r.json()
+        setClubs(clubs)
+
         const resp = await fetch(
-            'https://premierliga.ru/ajax/match/', 
+            'https://api.premierliga.ru/api/getMatches',
             {
-                'headers': {
-                    'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                },
-                'body': 'ajaxAction=getHeaderCalendar&tournament=1',
-                'method': 'POST'
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify({ tournament: 722 })
             }
         )
         const data = await resp.json()
-        
-        console.log(data)
+        const dataMatches = data.reduce((result, item) => result.concat(item.matches), [])
 
-        setStage(data.curTur)
-        setMatches(data.contents)
+        setStage(data.findIndex(d => d.matches.sort((a, b) => new Date(a.date) - new Date(b.date))[7].status < 4)) //last match not ended
+        setData(data)
     
-        const t = data.contents.reduce((result, item) => {
-            let i = result.findIndex(r => r.name === item.name1)
+        const t = dataMatches.reduce((result, item) => {
+            let i = result.findIndex(r => r.club === item.clubH)
             if (i < 0) {
                 result.push({
-                    name: item.name1,
-                    club: item.club1,
+                    name: clubs.find(c => c.id === item.clubH).name,
+                    logo: clubs.find(c => c.id === item.clubH).logo,
+                    club: item.clubH,
                     plays: 0,
                     w: 0,
                     d: 0,
@@ -57,21 +75,22 @@ export default function RuLeague () {
                 i = result.length - 1
             }
             
-            if (item.goal1 !== '') {
+            if (item.goalH !== null) {
                 result[i].plays += 1
-                result[i].w += item.goal1 > item.goal2 ? 1 : 0
-                result[i].d += item.goal1 == item.goal2 ? 1 : 0
-                result[i].l += item.goal1 < item.goal2 ? 1 : 0
-                result[i].z += parseInt(item.goal1)
-                result[i].p += parseInt(item.goal2)
-                result[i].points += item.goal1 > item.goal2 ? 3 : item.goal1 < item.goal2 ? 0 : 1
+                result[i].w += item.goalH > item.goalA ? 1 : 0
+                result[i].d += item.goalH == item.goalA ? 1 : 0
+                result[i].l += item.goalH < item.goalA ? 1 : 0
+                result[i].z += parseInt(item.goalH)
+                result[i].p += parseInt(item.goalA)
+                result[i].points += item.goalH > item.goalA ? 3 : item.goalH < item.goalA ? 0 : 1
             }
 
-            i = result.findIndex(r => r.name === item.name2)
+            i = result.findIndex(r => r.club === item.clubA)
             if (i < 0) {
                 result.push({
-                    name: item.name2,
-                    club: item.club2,
+                    name: clubs.find(c => c.id === item.clubA).name,
+                    logo: clubs.find(c => c.id === item.clubA).logo,
+                    club: item.clubA,
                     plays: 0,
                     w: 0,
                     d: 0,
@@ -83,14 +102,14 @@ export default function RuLeague () {
                 i = result.length - 1
             }
             
-            if (item.goal2 !== '') {
+            if (item.goalA !== null) {
                 result[i].plays += 1
-                result[i].w += item.goal2 > item.goal1 ? 1 : 0
-                result[i].d += item.goal2 == item.goal1 ? 1 : 0
-                result[i].l += item.goal2 < item.goal1 ? 1 : 0
-                result[i].z += parseInt(item.goal2)
-                result[i].p += parseInt(item.goal1)
-                result[i].points += item.goal2 > item.goal1 ? 3 : item.goal2 < item.goal1 ? 0 : 1
+                result[i].w += item.goalA > item.goalH ? 1 : 0
+                result[i].d += item.goalA == item.goalH ? 1 : 0
+                result[i].l += item.goalA < item.goalH ? 1 : 0
+                result[i].z += parseInt(item.goalA)
+                result[i].p += parseInt(item.goalH)
+                result[i].points += item.goalA > item.goalH ? 3 : item.goalA < item.goalH ? 0 : 1
             }
 
             return result
@@ -116,9 +135,9 @@ export default function RuLeague () {
                         <div>ОЧКОВ</div>
                     </div>
                     {table.map((c, i) => (
-                        <div class={classNames('rowWrapper', { active: team === c.name })} onClick={() => setTeam(c.name)}>
+                        <div class={classNames('rowWrapper', { active: team === c.club })} onClick={() => setTeam(c.club)}>
                             <div>{i+1}</div>
-                            <div class="name"><img src={c.club} width="30" height="30" />{c.name}</div>
+                            <div class="name"><img src={c.logo} width="30" height="30" />{c.name}</div>
                             <div>{c.plays}</div>
                             <div>{c.w}</div>
                             <div>{c.d}</div>
@@ -129,27 +148,27 @@ export default function RuLeague () {
                     ))}
                 </div>
 
-                {matches.length > 0 && <StageView matches={matches} stage={stage} />}
+                {data.length > 0 && <StageView data={data} stage={stage} clubs={clubs} />}
 
                 {team && 
                 <div class="ru-matches" ref={ref}>
-                    <div class="ru-title">Расписание матчей для команды <span class="ru-bold">{team}</span></div>
-                    {matches.filter(m => m.name1 === team || m.name2 === team).map(m => (
+                    <div class="ru-title">Расписание матчей для команды <span class="ru-bold">{clubs.find(c => c.id === team).name}</span></div>
+                    {data.reduce((result, item) => result.concat(item.matches), []).filter(m => m.clubH === team || m.clubA === team).map((m, i) => (
                         <div class={classNames('ru-match', {
-                            win: (m.goal1 !== '' && m.goal2 !== '') && ((m.name1 === team && m.goal1 > m.goal2) || (m.name2 === team && m.goal2 > m.goal1)),
-                            lose: (m.goal1 !== '' && m.goal2 !== '') && ((m.name1 === team && m.goal1 < m.goal2) || (m.name2 === team && m.goal2 < m.goal1)),
-                            draw: (m.goal1 !== '' && m.goal2 !== '') && m.goal1 === m.goal2
+                            win: (m.goalH !== '' && m.goalA !== '') && ((m.clubH === team && m.goalH > m.goalA) || (m.clubA === team && m.goalA > m.goalH)),
+                            lose: (m.goalH !== '' && m.goalA !== '') && ((m.clubH === team && m.goalH < m.goalA) || (m.clubA === team && m.goalA < m.goalH)),
+                            draw: (m.goalH !== '' && m.goalA !== '') && m.goalH === m.goalA
                         })}>
-                            <div>{m.stageName}</div>
-                            <div class="ru-date">{m.day + ', ' + m.time}</div>
+                            <div>{(i + 1) + ' тур'}</div>
+                            <div class="ru-date">{dayjs.tz(m.date, 'Europe/Moscow').format('DD MMM, ddd, HH:mm')}</div>
                             <div class="ru-score">
-                                <div class={classNames({ 'ru-bold': m.name1 === team })}>{m.name1}</div>
-                                <div class={classNames({ 'ru-bold': m.name2 === team })}>{m.name2}</div>
-                                {m.goal1 === '' && m.goal2 === '' ?
+                                <div class={classNames({ 'ru-bold': m.clubH === team })}>{clubs.find(c => c.id === m.clubH).name}</div>
+                                <div class={classNames({ 'ru-bold': m.clubA === team })}>{clubs.find(c => c.id === m.clubA).name}</div>
+                                {m.goalH === null && m.goalA === null ?
                                     <div class="ru-scheduled">Не начался</div> :
                                     <>
-                                        <div>{m.goal1}</div>
-                                        <div>{m.goal2}</div>
+                                        <div>{m.goalH}</div>
+                                        <div>{m.goalA}</div>
                                     </>
                                 }
                             </div>

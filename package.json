@@ -29,8 +29,8 @@
     "react-dom": "^19"
   },
   "devDependencies": {
-    "parcel": "^2.0.0",
+    "parcel": "^2",
     "process": "^0.11.10",
-    "svgo": "^3.3.2"
+    "svgo": "^4"
   }
 }
