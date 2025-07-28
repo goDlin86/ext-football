@@ -31,7 +31,7 @@ const App = () => {
                 <Link component={RuLeague}>
                     Чемпионат России
                 </Link>
-                <Link component={RuCup} props={{ season: 2024 }}>
+                <Link component={RuCup} props={{ season: 2025 }}>
                     Кубок России
                 </Link>
             </div>

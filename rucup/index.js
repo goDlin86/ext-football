@@ -32,13 +32,13 @@ export default function RuCup ({ season }) {
             console.log(data)
 
             setMatches(data.response
-                .filter(m => m.league.round.includes('Premier League Path'))
+                //.filter(m => m.league.round.includes('Premier League Path'))
                 .reduce((result, item, index) => {
-                    const i = result.findIndex(r => r.round === Math.ceil((index+1)/8))
+                    const i = result.findIndex(r => r.round === item.league.round)
                     if (i >= 0) {
                         result[i].matches.push(item)
                     } else {
-                        result.push({ round: Math.ceil((index+1)/8), matches: [item] })
+                        result.push({ round: item.league.round, matches: [item] })
                     }
 
                     return result
@@ -59,7 +59,7 @@ export default function RuCup ({ season }) {
                 <div class="rucup-table">
                     {matches.map(r => (
                         <>
-                            <div class="ru-title">{r.round + ' тур'}</div>
+                            <div class="rucup-round">{r.round + ' тур'}</div>
                             {r.matches.filter(m => activeTeam === null || m.teams.home.name === activeTeam || m.teams.away.name === activeTeam).map(m => (
                                 <>
                                     <div class="ru-scheduled">
