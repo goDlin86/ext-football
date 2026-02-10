@@ -28,6 +28,9 @@ const App = () => {
                 <Link component={ChampLeagueNew} props={{ season: 2024 }}>
                     Champions League 2024-2025
                 </Link>
+                <Link component={ChampLeagueNew} props={{ season: 2025 }}>
+                    Champions League 2025-2026
+                </Link>
                 <Link component={RuLeague}>
                     Чемпионат России
                 </Link>

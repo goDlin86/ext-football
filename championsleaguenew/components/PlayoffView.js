@@ -4,11 +4,11 @@ import dayjs from 'dayjs'
 export default function PlayoffView ({ matches }) {            
     const matchesByDay = matches.reduce(
         (result, item) => {
-            const i = result.findIndex(r => r.utcDate === item.utcDate)
+            const i = result.findIndex(r => r.date === item.fixture.date)
             if (i >= 0) {
                 result[i].matches.push(item)
             } else {
-                result.push({ utcDate: item.utcDate, matches: [item] })
+                result.push({ date: item.fixture.date, matches: [item] })
             }
             return result
         },
@@ -19,14 +19,14 @@ export default function PlayoffView ({ matches }) {
         <>
             {matchesByDay.map(d => (
                 <div className='groupstage'>
-                    <div className='date'>{dayjs(d.utcDate).format('DD MMM, HH:mm')}</div>
+                    <div className='date'>{dayjs(d.date).locale('en').format('DD MMM, HH:mm')}</div>
                     {d.matches.map(match => (
                         <div className='matchinfo'>
-                            <div>{match.homeTeam.name}</div>
-                            <div>{match.score.fullTime.home}</div>
+                            <div>{match.teams.home.name}</div>
+                            <div>{match.score.fulltime.home}</div>
                             <div> - </div>
-                            <div>{match.score.fullTime.away}</div>
-                            <div>{match.awayTeam.name}</div>
+                            <div>{match.score.fulltime.away}</div>
+                            <div>{match.teams.away.name}</div>
                         </div>
                     ))}
                 </div>

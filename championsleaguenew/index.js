@@ -15,18 +15,24 @@ export default function ChampLeagueNew ({ season }) {
   }, [])
 
   const fetchData = async () => {
-    chrome.storage.local.get(['football_api_token'], async ({ football_api_token }) => {       
+    chrome.storage.local.get(['api_sports'], async ({ api_sports }) => {       
       const resp = await fetch(
-        'https://api.football-data.org/v4/competitions/CL/matches?season=' + season,
-        { headers: { 'X-Auth-Token': football_api_token } }
+        'https://v3.football.api-sports.io/fixtures?league=2&season=' + season,
+        {
+          'method': 'GET',
+          'headers': {
+              'x-rapidapi-host': 'v3.football.api-sports.io',
+              'x-rapidapi-key': api_sports
+          }
+        }
       )
       const data = await resp.json()
       console.log(data)
 
-      if (data.resultSet.count > 0) {              
-        setMatches(data.matches)
-        setStage(data.resultSet.played > 143 ? 1 : 0)
-      }
+      //if (data.resultSet.count > 0) {              
+        setMatches(data.response)
+      //  setStage(data.resultSet.played > 143 ? 1 : 0)
+      //}
     })
   }
 
@@ -44,8 +50,8 @@ export default function ChampLeagueNew ({ season }) {
       </div>
       <div class="cl-container">
         {stage === 0 ? 
-          <LeagueView matches={matches.filter(m => m.stage === 'LEAGUE_STAGE')} /> : 
-          <PlayoffView matches={matches.slice(matches.findIndex(m => m.stage === 'PLAYOFFS'))} />
+          <LeagueView matches={matches.filter(m => m.league.round.startsWith('League Stage'))} /> : 
+          <PlayoffView matches={matches.slice(matches.findIndex(m => m.league.round.startsWith('Round')))} />
         }
       </div>
     </div>

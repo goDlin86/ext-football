@@ -3,8 +3,8 @@ import BackButton from '../home/BackButton'
 
 import classNames from 'classnames'
 
-import CyrillicToTranslit from 'cyrillic-to-translit-js'
-const cyrillicToTranslit = new CyrillicToTranslit()
+//import CyrillicToTranslit from 'cyrillic-to-translit-js'
+//const cyrillicToTranslit = new CyrillicToTranslit()
 
 import './style.css'
 
@@ -43,6 +43,7 @@ export default function RuCup ({ season }) {
 
                     return result
                 }, [])
+                .sort((a, b) => new Date(a.matches[0].fixture.date) - new Date(b.matches[0].fixture.date))
             )
         })
     }
@@ -66,7 +67,7 @@ export default function RuCup ({ season }) {
                                         {new Date(m.fixture.date).toLocaleDateString('ru-RU', { weekday: 'short', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                                     </div>
                                     <div class={classNames('ru-leftteam', 'clicked', {active: m.teams.home.name === activeTeam})} onClick={() => selectTeam(m.teams.home.name)}>
-                                        {cyrillicToTranslit.reverse(m.teams.home.name)}
+                                        {/* {cyrillicToTranslit.reverse(m.teams.home.name)} */} {m.teams.home.name}
                                     </div>
                                     <div><img src={m.teams.home.logo} width="30" height="30" /></div>
                                     <div>{m.score.fulltime.home}</div>
@@ -74,7 +75,7 @@ export default function RuCup ({ season }) {
                                     <div>{m.score.fulltime.away}</div>
                                     <div><img src={m.teams.away.logo } width="30" height="30" /></div>
                                     <div class={classNames('ru-rightteam', 'clicked', {active: m.teams.away.name === activeTeam})} onClick={() => selectTeam(m.teams.away.name)}>
-                                        {cyrillicToTranslit.reverse(m.teams.away.name)}
+                                        {/* {cyrillicToTranslit.reverse(m.teams.away.name)} */} {m.teams.away.name}
                                     </div>
                                 </>
                             ))}

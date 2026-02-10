@@ -8,7 +8,7 @@ export default function LeagueView ({ matches }) {
     const leagueTable = results.sort((a, b) => (b.points - a.points) || (b.plusminus - a.plusminus) || (b.goals - a.goals) || (b.plays - a.plays))
     console.log(leagueTable)
 
-    const matchesByDay = groupBy(matches, 'matchday', 'utcDate')
+    const matchesByDay = groupBy(matches, 'league.round', 'fixture.date')
     console.log(matchesByDay)
 
 

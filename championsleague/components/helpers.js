@@ -19,22 +19,22 @@ export const groupBy = (items, key, secondKey) => items.reduce(
 export const matchesInfo = (items) => items.reduce(
     (result, item) => {
         const homeTeam = { 
-            team: item.homeTeam.name,
-            crest: item.homeTeam.crest,
-            points: item.score.fullTime.home === null ? 0 : item.score.fullTime.home > item.score.fullTime.away ? 3 : item.score.fullTime.home < item.score.fullTime.away ? 0 : 1,
-            plays: item.score.fullTime.home !== null ? 1 : 0, 
-            plusminus: item.score.fullTime.home - item.score.fullTime.away,
-            goals: parseInt(item.score.fullTime.home) || 0,
-            group: item.group
+            team: item.teams.home.name,
+            crest: item.teams.home.logo,
+            points: item.score.fulltime.home === null ? 0 : item.score.fulltime.home > item.score.fulltime.away ? 3 : item.score.fulltime.home < item.score.fulltime.away ? 0 : 1,
+            plays: item.score.fulltime.home !== null ? 1 : 0, 
+            plusminus: item.score.fulltime.home - item.score.fulltime.away,
+            goals: parseInt(item.score.fulltime.home) || 0,
+            //group: item.group
         }
         const awayTeam = { 
-            team: item.awayTeam.name,
-            crest: item.awayTeam.crest,
-            points: item.score.fullTime.away === null ? 0 : item.score.fullTime.away > item.score.fullTime.home ? 3 : item.score.fullTime.away < item.score.fullTime.home ? 0 : 1,
-            plays: item.score.fullTime.away !== null ? 1 : 0, 
-            plusminus: item.score.fullTime.away - item.score.fullTime.home,
-            goals: parseInt(item.score.fullTime.away) || 0,
-            group: item.group
+            team: item.teams.away.name,
+            crest: item.teams.away.logo,
+            points: item.score.fulltime.away === null ? 0 : item.score.fulltime.away > item.score.fulltime.home ? 3 : item.score.fulltime.away < item.score.fulltime.home ? 0 : 1,
+            plays: item.score.fulltime.away !== null ? 1 : 0, 
+            plusminus: item.score.fulltime.away - item.score.fulltime.home,
+            goals: parseInt(item.score.fulltime.away) || 0,
+            //group: item.group
         }
 
         let i = result.findIndex(r => r.team === homeTeam.team)
