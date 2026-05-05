@@ -31,7 +31,7 @@ export default function ChampLeagueNew ({ season }) {
 
       //if (data.resultSet.count > 0) {              
         setMatches(data.response)
-      //  setStage(data.resultSet.played > 143 ? 1 : 0)
+        setStage(data.response.length > 235 ? 1 : 0)
       //}
     })
   }

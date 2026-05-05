@@ -1,0 +1,60 @@
+@font-face {
+  font-family: "WC2026";
+  src: url("font/Adidas_WC_2026_fan_inspired_font.ttf"); 
+}
+
+.worldcup26 {
+  background-color: white;
+  padding: 10px;
+  font-size: 16px;
+  color: black;
+  font-family: "WC2026";
+
+  .logo {
+    background-image: url(logo.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 150px;
+    height: 250px;
+    margin: auto;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    align-items: center;
+  }
+  .wc26-group {
+    background-color: black;
+    color: white;
+    display: grid;
+    grid-template-columns: 80% 10% 10%;
+    border-radius: 5px;
+    padding: 10px;
+
+    .title {
+      font-size: 24px;
+      grid-column: 1 / -1;
+    }
+  }
+  .wc26-stage {
+    background-color: black;
+    color: white;
+    text-align: center;
+    margin: 10px 0;
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 20px;
+
+    .matchinfo {
+      margin-bottom: 5px;
+    }
+    .leftteam {
+      text-align: right;
+    }
+    .rightteam {
+      text-align: left;
+    }
+  }
+}
