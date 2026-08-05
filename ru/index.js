@@ -48,7 +48,7 @@ export default function RuLeague () {
             {
                 method: 'POST',
                 headers: { 'content-type': 'application/json' },
-                body: JSON.stringify({ tournament: 722 })
+                body: JSON.stringify({ tournament: 724 })
             }
         )
         const data = await resp.json()
@@ -56,6 +56,7 @@ export default function RuLeague () {
 
         setStage(data.findIndex(d => d.matches.sort((a, b) => new Date(a.date) - new Date(b.date))[7].status < 4)) //last match not ended
         setData(data)
+        console.log(data)
     
         const t = dataMatches.reduce((result, item) => {
             let i = result.findIndex(r => r.club === item.clubH)

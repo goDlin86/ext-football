@@ -47,14 +47,12 @@
     border-radius: 5px;
     font-size: 20px;
 
+    .wc26-matches {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
     .matchinfo {
       margin-bottom: 5px;
-    }
-    .leftteam {
-      text-align: right;
-    }
-    .rightteam {
-      text-align: left;
     }
   }
 }

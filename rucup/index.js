@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react'
 import BackButton from '../home/BackButton'
 
 import classNames from 'classnames'
-
-//import CyrillicToTranslit from 'cyrillic-to-translit-js'
-//const cyrillicToTranslit = new CyrillicToTranslit()
+import * as cheerio from 'cheerio'
 
 import './style.css'
 
@@ -17,35 +15,30 @@ export default function RuCup ({ season }) {
     }, [])
 
     const fetchData = async () => {
-        chrome.storage.local.get(['api_sports'], async ({ api_sports }) => {
-            const resp = await fetch(
-                'https://v3.football.api-sports.io/fixtures?league=237&season=' + season,
-                {
-                    'method': 'GET',
-                    'headers': {
-                        'x-rapidapi-host': 'v3.football.api-sports.io',
-                        'x-rapidapi-key': api_sports
-                    }
-                }
-            )
-            const data = await resp.json()
-            console.log(data)
+        const r = await fetch('https://www.rfs.ru/cup/tournament/matches/rpl?TournamentMatchesFilter%5Bdate%5D=all')
+        const $ = await cheerio.load(await r.text())
 
-            setMatches(data.response
-                //.filter(m => m.league.round.includes('Premier League Path'))
-                .reduce((result, item, index) => {
-                    const i = result.findIndex(r => r.round === item.league.round)
-                    if (i >= 0) {
-                        result[i].matches.push(item)
-                    } else {
-                        result.push({ round: item.league.round, matches: [item] })
-                    }
+        const matches = $('.bet-tournament-region__item').toArray().map((item) => ({
+            date: $(item).find('.bet-tournament__date').text(),
+            matches: $(item).find('.tour-match').toArray().map((match) => ({
+                home: $(match).find('.tour-match__team.first > .tour-match__name').text().replace(/\s+/g, ' ').trim(),
+                homeLogo: $(match).find('.tour-match__team.first > .tour-match__logo img').attr('src'),
+                away: $(match).find('.tour-match__team.last > .tour-match__name').text().replace(/\s+/g, ' ').trim(),
+                awayLogo: $(match).find('.tour-match__team.last > .tour-match__logo img').attr('src'),
+                score: $(match).find('.tour-match__score').text().replace(/\s+/g, ' ').trim()
+            }))
+        }))
 
-                    return result
-                }, [])
-                .sort((a, b) => new Date(a.matches[0].fixture.date) - new Date(b.matches[0].fixture.date))
-            )
-        })
+        setMatches(matches.reduce((result, item, index) => {
+            const i = result.findIndex(r => r.date === item.date)
+            if (i >= 0) {
+                result[i].matches.push(...item.matches)
+            } else {
+                result.push(item)
+            }
+
+            return result
+        }, []).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()))
     }
 
     const selectTeam = (team) => {
@@ -58,24 +51,21 @@ export default function RuCup ({ season }) {
             <div class="rucup-logo" />
             <div class="rucup-container">
                 <div class="rucup-table">
-                    {matches.map(r => (
+                    {matches.map(match => (
                         <>
-                            <div class="rucup-round">{r.round + ' тур'}</div>
-                            {r.matches.filter(m => activeTeam === null || m.teams.home.name === activeTeam || m.teams.away.name === activeTeam).map(m => (
+                            <div class="ru-scheduled">
+                                {match.date}
+                            </div>
+                            {match.matches.filter(m => activeTeam === null || m.home === activeTeam || m.away === activeTeam).map(m => (
                                 <>
-                                    <div class="ru-scheduled">
-                                        {new Date(m.fixture.date).toLocaleDateString('ru-RU', { weekday: 'short', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                                    <div class={classNames('ru-leftteam', 'clicked', { active: m.home === activeTeam })} onClick={() => selectTeam(m.home)}>
+                                        {m.home}
                                     </div>
-                                    <div class={classNames('ru-leftteam', 'clicked', {active: m.teams.home.name === activeTeam})} onClick={() => selectTeam(m.teams.home.name)}>
-                                        {/* {cyrillicToTranslit.reverse(m.teams.home.name)} */} {m.teams.home.name}
-                                    </div>
-                                    <div><img src={m.teams.home.logo} width="30" height="30" /></div>
-                                    <div>{m.score.fulltime.home}</div>
-                                    <div>-</div>
-                                    <div>{m.score.fulltime.away}</div>
-                                    <div><img src={m.teams.away.logo } width="30" height="30" /></div>
-                                    <div class={classNames('ru-rightteam', 'clicked', {active: m.teams.away.name === activeTeam})} onClick={() => selectTeam(m.teams.away.name)}>
-                                        {/* {cyrillicToTranslit.reverse(m.teams.away.name)} */} {m.teams.away.name}
+                                    <div><img src={m.homeLogo} width="30" height="30" /></div>
+                                    <div>{m.score}</div>
+                                    <div><img src={m.awayLogo } width="30" height="30" /></div>
+                                    <div class={classNames('ru-rightteam', 'clicked', { active: m.away === activeTeam})} onClick={() => selectTeam(m.away)}>
+                                        {m.away}
                                     </div>
                                 </>
                             ))}
