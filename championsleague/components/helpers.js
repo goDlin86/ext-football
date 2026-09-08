@@ -61,3 +61,47 @@ export const matchesInfo = (items) => items.reduce(
     },
     []
 )
+
+export const matchesInfoNew = (items) => items.reduce(
+    (result, item) => {
+        const homeTeam = { 
+            team: item.home,
+            crest: item.homeLogo,
+            points: item.homeScore === '-' ? 0 : item.homeScore > item.awayScore ? 3 : item.homeScore < item.awayScore ? 0 : 1,
+            plays: item.homeScore !== '-' ? 1 : 0,
+            plusminus: parseInt(item.homeScore - item.awayScore) || 0,
+            goals: parseInt(item.homeScore) || 0,
+        }
+        const awayTeam = { 
+            team: item.away,
+            crest: item.awayLogo,
+            points: item.awayScore === '-' ? 0 : item.awayScore > item.homeScore ? 3 : item.awayScore < item.homeScore ? 0 : 1,
+            plays: item.awayScore !== '-' ? 1 : 0, 
+            plusminus: parseInt(item.awayScore - item.homeScore) || 0,
+            goals: parseInt(item.awayScore) || 0,
+        }
+
+        let i = result.findIndex(r => r.team === homeTeam.team)
+        if (i >= 0) {
+            result[i].points += homeTeam.points
+            result[i].plays += homeTeam.plays
+            result[i].plusminus += homeTeam.plusminus
+            result[i].goals += homeTeam.goals
+        } else {
+            result.push(homeTeam)
+        }
+        
+        i = result.findIndex(r => r.team === awayTeam.team)
+        if (i >= 0) {
+            result[i].points += awayTeam.points
+            result[i].plays += awayTeam.plays
+            result[i].plusminus += awayTeam.plusminus
+            result[i].goals += awayTeam.goals
+        } else {
+            result.push(awayTeam)
+        }
+
+        return result
+    },
+    []
+)

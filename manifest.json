@@ -21,6 +21,7 @@
     "host_permissions": [ 
         "https://api.football-data.org/*",
         "https://api.premierliga.ru/*",
-        "https://www.rfs.ru/cup/tournament/matches/*"
+        "https://www.rfs.ru/cup/tournament/matches/*",
+        "https://www.sports.ru/football/tournament/*"
     ]
 }

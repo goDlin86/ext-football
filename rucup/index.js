@@ -3,10 +3,15 @@ import BackButton from '../home/BackButton'
 
 import classNames from 'classnames'
 import * as cheerio from 'cheerio'
+import dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+import 'dayjs/locale/ru'
+dayjs.locale('ru')
+dayjs.extend(customParseFormat)
 
 import './style.css'
 
-export default function RuCup ({ season }) {
+export default function RuCup () {
     const [matches, setMatches] = useState([])
     const [activeTeam, setTeam] = useState(null)
 
@@ -16,7 +21,7 @@ export default function RuCup ({ season }) {
 
     const fetchData = async () => {
         const r = await fetch('https://www.rfs.ru/cup/tournament/matches/rpl?TournamentMatchesFilter%5Bdate%5D=all')
-        const $ = await cheerio.load(await r.text())
+        const $ = cheerio.load(await r.text())
 
         const matches = $('.bet-tournament-region__item').toArray().map((item) => ({
             date: $(item).find('.bet-tournament__date').text(),
@@ -29,16 +34,20 @@ export default function RuCup ({ season }) {
             }))
         }))
 
-        setMatches(matches.reduce((result, item, index) => {
-            const i = result.findIndex(r => r.date === item.date)
-            if (i >= 0) {
-                result[i].matches.push(...item.matches)
-            } else {
-                result.push(item)
-            }
+        setMatches(
+            matches
+                .reduce((result, item, index) => {
+                    const i = result.findIndex(r => r.date === item.date)
+                    if (i >= 0) {
+                        result[i].matches.push(...item.matches)
+                    } else {
+                        result.push(item)
+                    }
 
-            return result
-        }, []).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()))
+                    return result
+                }, [])
+                .sort((a, b) => dayjs(a.date, 'D MMMM YYYY', 'ru') - dayjs(b.date, 'D MMMM YYYY', 'ru'))
+        )
     }
 
     const selectTeam = (team) => {

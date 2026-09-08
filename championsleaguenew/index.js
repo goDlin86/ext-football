@@ -3,6 +3,8 @@ import LeagueView from './components/LeagueView'
 import PlayoffView from './components/PlayoffView'
 import BackButton from '../home/BackButton'
 
+import * as cheerio from 'cheerio'
+
 import '../championsleague/style.css'
 import './style.css'
 
@@ -15,25 +17,22 @@ export default function ChampLeagueNew ({ season }) {
   }, [])
 
   const fetchData = async () => {
-    chrome.storage.local.get(['api_sports'], async ({ api_sports }) => {       
-      const resp = await fetch(
-        'https://v3.football.api-sports.io/fixtures?league=2&season=' + season,
-        {
-          'method': 'GET',
-          'headers': {
-              'x-rapidapi-host': 'v3.football.api-sports.io',
-              'x-rapidapi-key': api_sports
-          }
-        }
-      )
-      const data = await resp.json()
-      console.log(data)
+    const r = await fetch('https://www.sports.ru/football/tournament/ucl/calendar/')
+    const $ = cheerio.load(await r.text())
 
-      //if (data.resultSet.count > 0) {              
-        setMatches(data.response)
-        setStage(data.response.length > 235 ? 1 : 0)
-      //}
-    })
+    const matches = $('.calendar-card').toArray().map((item) => ({
+      date: $(item).find('time').attr('datetime'),
+      home: $(item).find('.calendar-card__home').text().replace(/\s+/g, ' ').trim(),
+      homeLogo: $(item).find('.calendar-card__home > img').attr('src'),
+      homeScore: $(item).find('.calendar-card__score span:first-of-type').text().replace(/\s+/g, ' ').trim(),
+      away: $(item).find('.calendar-card__away').text().replace(/\s+/g, ' ').trim(),
+      awayLogo: $(item).find('.calendar-card__away > img').attr('src'),
+      awayScore: $(item).find('.calendar-card__score span:last-of-type').text().replace(/\s+/g, ' ').trim()
+    }))
+    
+    console.log(matches)
+    setMatches(matches)
+    //setStage(data.response.length > 235 ? 1 : 0)
   }
 
   return (
@@ -50,8 +49,8 @@ export default function ChampLeagueNew ({ season }) {
       </div>
       <div class="cl-container">
         {stage === 0 ? 
-          <LeagueView matches={matches.filter(m => m.league.round.startsWith('League Stage'))} /> : 
-          <PlayoffView matches={matches.slice(matches.findIndex(m => m.league.round.startsWith('Round')))} />
+          <LeagueView matches={matches} /> : 
+          <PlayoffView matches={matches} />
         }
       </div>
     </div>
