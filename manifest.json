@@ -22,6 +22,7 @@
         "https://api.football-data.org/*",
         "https://api.premierliga.ru/*",
         "https://www.rfs.ru/cup/tournament/matches/*",
-        "https://www.sports.ru/football/tournament/*"
+        "https://www.sports.ru/football/tournament/*",
+        "https://www.sports.ru/gql/graphql/"
     ]
 }
